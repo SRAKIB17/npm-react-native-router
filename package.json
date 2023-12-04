@@ -1,0 +1,33 @@
+{
+  "name": "react-native-router-screen",
+  "version": "1.0.41",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "description": "React Native Router Screen is a powerful and flexible navigation library for React Native applications. It provides a comprehensive and customizable navigation solution for building complex navigation structures in your mobile apps. Below is a description of its key features and components: Navigation Stack Management,Customizable Navigation Bars, Drawer Navigation, Tab Navigation, Custom Transitions, Dynamic Routes and Parameters, Router Configuration, Context and State Management, Screen Rendering and Navigation Logic, Customization and Extensibility.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SRAKIB17/npm-react-native-router.git"
+  },
+  "author": "SRAKIB17",
+  "files": [
+    "components",
+    "navigators",
+    "assets",
+    "index.d.ts"
+  ],
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-native": "0.72.6"
+  },
+  "keywords": [
+    "react-native",
+    "router",
+    "screen",
+    "render",
+    "parse",
+    "query",
+    "string",
+    "querystring",
+    "stringify"
+  ]
+}
