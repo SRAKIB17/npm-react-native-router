@@ -10,7 +10,7 @@ npm i react-native-router-screen
 
 NB: Close the project and start anew
 
-## Example: <https://github.com/SRAKIB17/npm-react-native-router-exmple>
+## [Example](https://github.com/SRAKIB17/npm-react-native-router/tree/main/example)
 
 ### Import
 
