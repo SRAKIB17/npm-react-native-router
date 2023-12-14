@@ -1,10 +1,9 @@
-import React, { useContext, useRef, useState } from 'react';
-import { StyleSheet, View, ImageStyle, TextStyle, ViewStyle } from 'react-native';
-import { useTheme } from '../theming/ThemeContext';
+import React from 'react';
+import { ImageStyle, StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
 import { StyledText, TouchableOpacityButton } from '../../components';
 import { global_styles } from '../../components/global';
 import { useRouter } from '../router/RouterContext';
-import { assets_images } from '../../../assets/assets_images';
+import { useTheme } from '../theming/ThemeContext';
 
 const NavbarTitleBackButton = ({
     title,
@@ -74,7 +73,7 @@ const NavbarTitleBackButton = ({
                             }
                         }
                     }}
-                    image={assets_images.arrow_left_indicate}
+                    text={"back"}
                     containerStyle={{
                         backgroundColor: 'transparent',
                         width: 36,

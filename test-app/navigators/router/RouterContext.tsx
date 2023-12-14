@@ -70,7 +70,7 @@ export function RouterProvider({ basePath: basePath, children, setLoadingCompone
     }
 
     const historyConstructor: any = new history()
-    const send_date = {
+    const send_date: any = {
         basePath: parseBasePath,
         title: title,
         push,

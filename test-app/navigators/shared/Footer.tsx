@@ -1,45 +1,32 @@
-import { View, Pressable, Image, StyleSheet, TouchableHighlight } from 'react-native';
+import { Image, Pressable, StyleSheet, View } from 'react-native';
+import { StyledText } from '../../components';
 import { useRouter } from '../router/RouterContext';
 import { useTheme } from '../theming/ThemeContext';
-import { useTranslate } from '../../../context/TranslateContext';
-import { assets_images } from '../../../assets/assets_images';
-import navigate_link from '../../../navigate_link';
-import { StyledText } from '../../components';
 
 export default function Footer() {
     const router = useRouter();
     const { colors, dark } = useTheme()
-    const { wishlist, home, cart, shopping, profile } = useTranslate()
     const footerMenuButton = [
         {
-            select: assets_images.home_primary,
-            default: assets_images.home,
-            title: home,
-            link: navigate_link.home,
+
+            title: "Home",
+            link: '',
         },
         {
-            select: assets_images.shopping_primary,
-            default: assets_images.shopping,
-            title: shopping,
-            link: navigate_link.shopping
+            title: "Home",
+            link: '',
         },
         {
-            select: assets_images.wishlist_primary,
-            default: assets_images.wishlist,
-            title: wishlist,
-            link: navigate_link.wishlists
+            title: "Home",
+            link: '',
         },
         {
-            select: assets_images.carts_primary,
-            default: assets_images.carts,
-            title: cart,
-            link: navigate_link.carts
+            title: "Home",
+            link: '',
         },
         {
-            select: assets_images.profile_primary,
-            default: assets_images.profile,
-            title: profile,
-            link: navigate_link.account
+            title: "Home",
+            link: '',
         }
     ]
     const styles = StyleSheet.create({
@@ -110,7 +97,7 @@ export default function Footer() {
     return (
         <View style={styles.footer}>
             {
-                footerMenuButton?.map((r, index) => {
+                footerMenuButton?.map((r: any, index) => {
                     const check = router.path === r.link;
                     return (
                         <View key={index}>

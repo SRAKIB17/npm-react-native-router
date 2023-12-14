@@ -1,9 +1,6 @@
-import React, { useRef, useState } from 'react';
-import { StyleSheet, View, Text, } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View, } from 'react-native';
 import { useTheme } from '../theming/ThemeContext';
-import { PressableButton } from '../../components';
-import TouchableHighlightButton from '../../components/button/TouchableHighlightButton';
-import { assets_images } from '../../../assets/assets_images';
 
 const MainNavbar = ({ title }: { title: string }) => {
     const { colors } = useTheme()
@@ -57,7 +54,7 @@ const MainNavbar = ({ title }: { title: string }) => {
                 </Text>
             </View>
 
-            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+            {/* <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8 }}>
 
                 <View>
                     <TouchableHighlightButton
@@ -67,24 +64,24 @@ const MainNavbar = ({ title }: { title: string }) => {
                             borderWidth: 0,
                             width: 48,
                         }}
-                        image={assets_images?.search}
+                        image={assets_images?.}
                         imageStyle={{
                             height: 24,
                             width: 24
                         }}
                     // onPress={() => setIsVisible(true)}
                     />
-                    {/* <View
+                    <View
                                 style={styles.navbar_button}
                             >
                                 <Image
                                     source={assets_images.search_white}
                                     style={{ height: 28, width: 28 }}
                                 />
-                            </View> */}
+                            </View>
                 </View>
 
-            </View>
+            </View> */}
 
             {/* ************** */}
             {/* <SearchScreen isVisible={isVisible} setIsVisible={setIsVisible} /> */}

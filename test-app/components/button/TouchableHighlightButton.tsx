@@ -2,11 +2,11 @@ import React from 'react';
 import { Image, ImageStyle, Pressable, StyleSheet, TextStyle, TouchableHighlight, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { global_styles } from '../global';
 import StyledText from '../text/StyledText';
-import { useTheme } from '../../navigators/theming/ThemeContext';
+import { useTheme } from '../../../test/navigators/theming/ThemeContext';
 import { ButtonProps } from '../types';
 
 
-export default function PressableButton({
+export default function TouchableHighlightButton({
     text,
     disableStyle,
     onPress,
@@ -30,7 +30,8 @@ export default function PressableButton({
     })
 
     return (
-        <Pressable
+        <TouchableHighlight
+            underlayColor="white"
             onPress={onPress}
             disabled={disabled}
         >
@@ -77,7 +78,7 @@ export default function PressableButton({
                     }
                 </View>
             </View>
-        </Pressable>
+        </TouchableHighlight>
     );
 };
 

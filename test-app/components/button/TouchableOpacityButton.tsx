@@ -1,18 +1,20 @@
 import React from 'react';
 import { Image, ImageStyle, Pressable, StyleSheet, TextStyle, TouchableHighlight, TouchableOpacity, View, ViewStyle } from 'react-native';
-import { global_styles } from '../global';
 import StyledText from '../text/StyledText';
-import { useTheme } from '../../navigators/theming/ThemeContext';
+import { global_styles } from '../global';
+import { useTheme } from '../../../test/navigators/theming/ThemeContext';
 import { ButtonProps } from '../types';
 
-
-export default function TouchableHighlightButton({
+export default function TouchableOpacityButton({
     text,
-    disableStyle,
     onPress,
+    disableStyle,
     containerStyle,
-    disabled = false, image = 0, image_url = '', imageStyle
-    , textStyle
+    disabled = false,
+    image = 0,
+    image_url = '',
+    imageStyle,
+    textStyle
 }: ButtonProps) {
     const { colors } = useTheme()
     const styles = StyleSheet.create({
@@ -30,8 +32,7 @@ export default function TouchableHighlightButton({
     })
 
     return (
-        <TouchableHighlight
-            underlayColor="white"
+        <TouchableOpacity
             onPress={onPress}
             disabled={disabled}
         >
@@ -78,7 +79,7 @@ export default function TouchableHighlightButton({
                     }
                 </View>
             </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
     );
 };
 

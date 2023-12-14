@@ -1,7 +1,7 @@
-import React, { StyleHTMLAttributes } from 'react';
-import { Text, ImageStyle, TextStyle, ViewStyle } from 'react-native';
+import React from 'react';
+import { Text } from 'react-native';
+import { useTheme } from '../../../test/navigators/theming/ThemeContext';
 import { global_styles } from '../global';
-import { useTheme } from '../../navigators/theming/ThemeContext';
 import { StyleTextProps } from '../types';
 
 
