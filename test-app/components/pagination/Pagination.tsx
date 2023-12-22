@@ -1,7 +1,7 @@
 import { StyleSheet, View } from "react-native";
+import { useTheme } from "../../navigators";
 import PressableButton from "../button/PressableButton";
 import { global_styles } from "../global";
-import { useTheme } from "../../../test/navigators/theming/ThemeContext";
 
 const Pagination = ({
     pageHandle = () => { },

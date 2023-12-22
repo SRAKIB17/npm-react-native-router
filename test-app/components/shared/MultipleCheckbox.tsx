@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, TouchableOpacity, StyleSheet, Image, ViewStyle, TextStyle, ImageStyle, } from 'react-native';
-import { assets_images } from '../../../assets/assets_images';
+import { Image, ImageStyle, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { assets_images } from '../../assets/assets_images';
 
 const MultipleCheckbox = ({
     style,
@@ -10,8 +10,8 @@ const MultipleCheckbox = ({
     asset
 }: {
     asset?: {
-        checked?: number
-        unchecked?: number
+        checked?: any
+        unchecked?: any
     },
     style?: ViewStyle | TextStyle | ImageStyle | object,
     data: any,
@@ -39,7 +39,9 @@ const MultipleCheckbox = ({
             <View style={{ padding: 4 }}>
                 {isChecked ? (
                     <Image
-                        source={(asset ? asset.checked : assets_images.checkbox_round_checked)}
+                        source={(
+                            asset ? asset.checked : assets_images.checkbox_round_checked)
+                        }
                         style={[{ width: 24, height: 24 }, style]}
 
                     />

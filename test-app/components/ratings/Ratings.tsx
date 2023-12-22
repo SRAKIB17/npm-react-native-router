@@ -1,7 +1,6 @@
 import React from 'react';
 import { Image, View } from 'react-native';
-import { assets_images } from '../../../assets/assets_images';
-
+import { assets_images } from '../../assets/assets_images';
 export default function Ratings({
     size = 20,
     rating = 0,
@@ -20,8 +19,8 @@ export default function Ratings({
         <View style={{ flexDirection: 'row', gap: 1 }}>
             {
                 [...Array(5)].map((r, index) => {
-                    const check = index + 1 <= ratings ?
-                        (asset?.fill ? asset.fill : assets_images.ratings_full_check)
+                    const check: any = index + 1 <= ratings ?
+                        (asset?.fill ? asset.fill : assets_images)
                         :
                         (asset?.fill ? asset.empty : assets_images.ratings_full_empty)
                     return (

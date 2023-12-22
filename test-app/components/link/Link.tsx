@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Pressable, } from 'react-native';
+import { useRouter, useTheme } from '../../navigators';
 import StyledText from '../text/StyledText';
-import { useRouter } from '../../../test/navigators/router/RouterContext';
-import { useTheme } from '../../../test/navigators/theming/ThemeContext';
 import { LinkProps } from '../types';
 
 export default function Link({

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { useTheme } from '../../../test/navigators/theming/ThemeContext';
+import { useTheme } from '../../navigators';
 import { global_styles } from '../global';
 import { StyleTextProps } from '../types';
 

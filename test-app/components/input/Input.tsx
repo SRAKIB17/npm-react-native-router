@@ -3,8 +3,8 @@ import { Image, ImageBackground, ImageStyle, StyleSheet, TextInput, TextStyle, V
 import Toast from '../toast/Toast';
 import { global_styles } from '../global';
 import StyledText from '../text/StyledText';
-import { useTheme } from '../../../test/navigators/theming/ThemeContext';
 import { InputProps } from '../types';
+import { useTheme } from '../../navigators';
 
 export default function Input({
     asset,
