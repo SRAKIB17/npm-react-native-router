@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Image, ImageBackground, ImageStyle, StyleSheet, TextInput, TextStyle, View, ViewStyle } from 'react-native';
-import Toast from '../toast/Toast';
+import { Image, StyleSheet, TextInput, View } from 'react-native';
+import { useTheme } from '../../navigators/theming/ThemeContext';
 import { global_styles } from '../global';
 import StyledText from '../text/StyledText';
-import { useTheme } from '../../navigators/theming/ThemeContext';
+import Toast from '../toast/Toast';
 
 export default function Input({
     asset,

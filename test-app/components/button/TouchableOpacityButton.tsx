@@ -2,8 +2,8 @@ import React from 'react';
 import { Image, ImageStyle, Pressable, StyleSheet, TextStyle, TouchableHighlight, TouchableOpacity, View, ViewStyle } from 'react-native';
 import StyledText from '../text/StyledText';
 import { global_styles } from '../global';
-import { useTheme } from '../../../test/navigators/theming/ThemeContext';
 import { ButtonProps } from '../types';
+import { useTheme } from '../../navigators';
 
 export default function TouchableOpacityButton({
     text,

@@ -4,6 +4,7 @@ import { useTheme } from "./theming/ThemeContext";
 import { useParams } from "./params/ParamsContext";
 import { useRouter } from "./router/RouterContext";
 import DrawerContainer, { userDrawer } from "./drawer/DrawerContainer";
+import NavbarTitleBackButton from "./shared/NavbarTitleBackButton";
 
 import {
     ScreenProps,
@@ -19,6 +20,7 @@ import {
 export {
     DrawerContainer,
     NavigationContainer,
+    NavbarTitleBackButton,
     RouterProps,
     RenderScreen,
     useRouter,

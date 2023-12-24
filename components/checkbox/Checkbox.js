@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, TouchableOpacity, StyleSheet, Image, ViewStyle, TextStyle, ImageStyle, } from 'react-native';
+import React from 'react';
+import { Image, TouchableOpacity } from 'react-native';
 import { assets_images } from '../../assets/assets_images';
 const Checkbox = ({ isChecked = false, setChecked = () => { }, style, asset }) => {
     const toggleCheckbox = () => { setChecked(!isChecked); }; return (<TouchableOpacity onPress={toggleCheckbox}>

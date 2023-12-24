@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, Modal, StyleSheet, ScrollView, Image, Pressable, ViewStyle, TextStyle, ImageStyle, TouchableHighlight, Dimensions, StatusBar } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Dimensions, Image, Modal, Pressable, ScrollView, StatusBar, StyleSheet, TouchableHighlight, View } from 'react-native';
 import { assets_images } from '../../assets/assets_images';
-import Input from '../input/Input';
-import Toast from '../toast/Toast';
-import StyledText from '../text/StyledText';
+import { useTheme } from '../../navigators/theming/ThemeContext';
 import PressableButton from '../button/PressableButton';
 import { global_styles } from '../global';
+import Input from '../input/Input';
 import MultipleCheckbox from '../shared/MultipleCheckbox';
-import { useTheme } from '../../navigators/theming/ThemeContext';
+import StyledText from '../text/StyledText';
+import Toast from '../toast/Toast';
 
 
 const { height, width } = Dimensions.get('window');

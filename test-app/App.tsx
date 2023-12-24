@@ -1,11 +1,12 @@
 import { StatusBar, View } from 'react-native';
-import { DrawerContainer, NavigationContainer, RenderScreen, useTheme } from './navigators';
+import { DrawerContainer, NavbarTitleBackButton, NavigationContainer, RenderScreen, useRouter, useTheme } from './navigators';
+import { PressableButton } from './components';
 
 export default function App() {
   return (
     <NavigationContainer
       // scheme={scheme !== 'dark' ? 'dark' : 'default'}
-      basePath={'/'}
+      basePath={'/home'}
     >
       <WrapScreen />
     </NavigationContainer>
@@ -37,6 +38,9 @@ function Screen(): JSX.Element {
         path={'/home'}
         title='Home'
         // hasNavbar={true}
+        navbar={<NavbarTitleBackButton
+          title='' children={<Home />}
+        />}
         isPrivate={true}
         privateState={true}
         screen={Home}
@@ -59,24 +63,27 @@ function Screen(): JSX.Element {
 }
 
 const Home = () => {
+  const router = useRouter()
   return (
     <View>
-
+      <PressableButton text={"About"} onPress={() => { router.push('/about') }} />
     </View>
   )
 }
 const About = () => {
+  const router = useRouter()
   return (
     <View>
-
+      <PressableButton text={"Settings"} onPress={() => { router.push('/settings') }} />
     </View>
   )
 }
 
 const Settings = () => {
+  const router = useRouter()
   return (
     <View>
-
+      <PressableButton text={"Home"} onPress={() => { router.push('/home') }} />
     </View>
   )
 }

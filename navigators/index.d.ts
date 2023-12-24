@@ -4,10 +4,11 @@ import { useTheme, ThemeProps } from "./theming/ThemeContext";
 import { useRouter, RouterProps } from './router/RouterContext'
 import DrawerContainer, { DrawerProps, userDrawer } from './drawer/DrawerContainer'
 import RenderScreen, { RenderScreenProps, ScreenProps } from './RenderScreen'
-import NavbarTitleBackButton from "./shared/NavbarTitleBackButton";
+import NavbarTitleBackButton, { NavbarTitleProps } from "./shared/NavbarTitleBackButton";
 
 export {
     NavbarTitleBackButton as Navbar,
+    NavbarTitleProps,
     NavigationContainer,
     NavigationContainerProps,
     ThemeColorNameProps,

@@ -8,7 +8,6 @@ import { global_styles } from '../../components/global';
 
 const NavbarTitleBackButton = ({
     title,
-    backward,
     clickAbleFunction,
     style,
     children

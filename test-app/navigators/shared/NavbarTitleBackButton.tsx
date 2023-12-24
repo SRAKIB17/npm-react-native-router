@@ -4,6 +4,7 @@ import { StyledText, TouchableOpacityButton } from '../../components';
 import { global_styles } from '../../components/global';
 import { useRouter } from '../router/RouterContext';
 import { useTheme } from '../theming/ThemeContext';
+import { assets_images } from '../../assets/assets_images';
 
 const NavbarTitleBackButton = ({
     title,
@@ -12,14 +13,11 @@ const NavbarTitleBackButton = ({
     children
 }: {
     title: string
-    backward: string,
     clickAbleFunction?: () => void,
     children?: React.ReactNode,
     style?: ViewStyle | TextStyle | ImageStyle | object,
 }) => {
-
     const { push, history, basePath } = useRouter()
-
     const { colors, dark } = useTheme()
     const styles = StyleSheet.create({
         navbar: {
@@ -55,8 +53,12 @@ const NavbarTitleBackButton = ({
             {/* <Image source={{ uri: svgBase64 }} /> */}
             <View>
                 <TouchableOpacityButton
+                    image={assets_images.dropdown_arrow_grey}
                     key={title}
                     imageStyle={{
+                        transform: [
+                            { rotate: '90deg' }
+                        ],
                         width: 24,
                         height: 24,
                     }}
@@ -73,7 +75,6 @@ const NavbarTitleBackButton = ({
                             }
                         }
                     }}
-                    text={"back"}
                     containerStyle={{
                         backgroundColor: 'transparent',
                         width: 36,
