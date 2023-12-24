@@ -1,8 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View, } from 'react-native';
+import { Image, StyleSheet, Text, View, } from 'react-native';
 import { useTheme } from '../theming/ThemeContext';
+import { assets_images } from '../../assets/assets_images';
+import TouchableHighlightButton from '../../components/button/TouchableHighlightButton';
 
-const MainNavbar = ({ title }: { title: string }) => {
+const MainNavbar = ({
+    title,
+    children
+}: {
+    children?: React.ReactNode,
+    title: string
+}) => {
     const { colors } = useTheme()
     const styles = StyleSheet.create({
         navbar: {
@@ -53,39 +61,11 @@ const MainNavbar = ({ title }: { title: string }) => {
                     }
                 </Text>
             </View>
-
-            {/* <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-
-                <View>
-                    <TouchableHighlightButton
-                        containerStyle={{
-                            height: 48,
-                            backgroundColor: 'transparent',
-                            borderWidth: 0,
-                            width: 48,
-                        }}
-                        image={assets_images?.}
-                        imageStyle={{
-                            height: 24,
-                            width: 24
-                        }}
-                    // onPress={() => setIsVisible(true)}
-                    />
-                    <View
-                                style={styles.navbar_button}
-                            >
-                                <Image
-                                    source={assets_images.search_white}
-                                    style={{ height: 28, width: 28 }}
-                                />
-                            </View>
-                </View>
-
-            </View> */}
-
-            {/* ************** */}
-            {/* <SearchScreen isVisible={isVisible} setIsVisible={setIsVisible} /> */}
-            {/* <Button title='fsdf' /> */}
+            <View>
+                {
+                    children
+                }
+            </View>
         </View>
     );
 };

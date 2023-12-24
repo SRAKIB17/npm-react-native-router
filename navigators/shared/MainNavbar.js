@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { useTheme } from '../theming/ThemeContext';
 
-const MainNavbar = ({ title }) => {
+const MainNavbar = ({ title, children }) => {
     const { colors } = useTheme();
 
     const styles = StyleSheet.create({
@@ -43,26 +43,11 @@ const MainNavbar = ({ title }) => {
                     {title}
                 </Text>
             </View>
-
-            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-                {/* 
-        <View>
-          <Pressable onPress={() => setIsVisible(true)}>
-            <View
-              style={styles.navbar_button}
-            >
-              <Image
-                source={assets_images.search_white}
-                style={{ height: 28, width: 28 }}
-              />
+            <View>
+                {
+                    children
+                }
             </View>
-          </Pressable>
-        </View> */}
-            </View>
-
-            {/* ************** */}
-            {/* <SearchScreen isVisible={isVisible} setIsVisible={setIsVisible} /> */}
-            {/* <Button title='fsdf' /> */}
         </View>
     );
 };

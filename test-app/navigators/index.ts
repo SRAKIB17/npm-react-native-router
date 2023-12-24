@@ -5,6 +5,7 @@ import { useParams } from "./params/ParamsContext";
 import { useRouter } from "./router/RouterContext";
 import DrawerContainer, { userDrawer } from "./drawer/DrawerContainer";
 import NavbarTitleBackButton from "./shared/NavbarTitleBackButton";
+import MainNavbar from "./shared/MainNavbar";
 
 import {
     ScreenProps,
@@ -19,6 +20,7 @@ import {
 
 export {
     DrawerContainer,
+    MainNavbar,
     NavigationContainer,
     NavbarTitleBackButton,
     RouterProps,

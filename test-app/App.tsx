@@ -1,5 +1,5 @@
 import { StatusBar, View } from 'react-native';
-import { DrawerContainer, NavbarTitleBackButton, NavigationContainer, RenderScreen, useRouter, useTheme } from './navigators';
+import { DrawerContainer, MainNavbar, NavbarTitleBackButton, NavigationContainer, RenderScreen, useRouter, useTheme } from './navigators';
 import { PressableButton } from './components';
 
 export default function App() {
@@ -38,8 +38,8 @@ function Screen(): JSX.Element {
         path={'/home'}
         title='Home'
         // hasNavbar={true}
-        navbar={<NavbarTitleBackButton
-          title='' children={<Home />}
+        navbar={<MainNavbar
+          title='Ahliya' children={<Home />}
         />}
         isPrivate={true}
         privateState={true}
