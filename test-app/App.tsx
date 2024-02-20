@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
-import { Animated, PanResponder, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { Animated, PanResponder, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { PressableButton, StyledText } from './components';
-import { DrawerContainer, MainNavbar, NavigationContainer, RenderScreen, useRouter, useTheme } from './navigators';
+import { DrawerContainer, MainNavbar, NavigationContainer, RenderScreen, useRouter, useTheme, useNavigation, } from './navigators';
 
 
 export default function App() {
@@ -17,6 +17,8 @@ export default function App() {
 
 const WrapScreen = () => {
   const { dark, colors } = useTheme();
+  const x = useNavigation()
+  console.log(x)
   return (
     <DrawerContainer>
       <StatusBar
@@ -65,12 +67,13 @@ function Screen(): JSX.Element {
 }
 
 const Home = () => {
-  const router = useRouter()
+  const router = useRouter();
+
   return (
-    <View>
-      <CustomDrawer />
+    <ScrollView>
       <PressableButton text={"About"} onPress={() => { router.push('/about') }} />
-    </View>
+      <CustomDrawer />
+    </ScrollView>
   )
 }
 const About = () => {

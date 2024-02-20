@@ -1,7 +1,7 @@
-import React, { createContext, useState, useContext } from 'react';
-import { ThemeProvider } from './theming/ThemeContext';
+import React, { createContext, useContext, useState } from 'react';
 import { ParamsProvider } from './params/ParamsContext';
 import { RouterProvider } from './router/RouterContext';
+import { ThemeProvider } from './theming/ThemeContext';
 
 const RenderContext = createContext({
     setAllParams: () => { },
@@ -50,7 +50,7 @@ export default function NavigationContainer({
                         config: config,
                         setAllParams: setAllParams,
                     }}>
-                        <ParamsProvider value={params}>
+                        <ParamsProvider setParams={setAllParams} value={params}>
                             {children}
                         </ParamsProvider>
                     </RenderContext.Provider>

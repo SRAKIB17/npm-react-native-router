@@ -29,7 +29,8 @@ export type DrawerProps = {
 }
 
 export type ParamsProps = {
-    [key: string]: string | number
+    params: { [key: string]: string | number },
+    setParams: (params: { [key: string]: any; }) => void,
 }
 
 export type NavigationProviderProps = {

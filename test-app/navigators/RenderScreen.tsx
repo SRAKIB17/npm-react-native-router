@@ -158,7 +158,6 @@ export default class RenderScreen {
                                                             (checkNavFooterConfig && navFooterConfig?.navbar) ?
                                                                 navFooterConfig?.navbar :
                                                                 <NavbarTitleBackButton
-                                                                    backward=''
                                                                     title={findScreen?.props?.title}
                                                                 />
                                                         }
@@ -265,7 +264,6 @@ export default class RenderScreen {
                                                                 navFooterConfig?.navbar
                                                                 :
                                                                 <NavbarTitleBackButton
-                                                                    backward=''
                                                                     title={children?.props?.title}
                                                                 />
                                                         }
