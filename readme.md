@@ -45,6 +45,12 @@ Wrap the whole project with **`NavigationContainer`**
 
 #### homeNavbar
 
+import and use.
+| Property    | Type               | Description                                                          |
+|-------------|--------------------|----------------------------------------------------------------------|
+| `title`     | `string`           | The title to be displayed in the main navigation bar.               |
+| `children`  | `React.ReactNode`  | (Optional) Additional React elements that can be included in the main navigation bar. |
+
 ```js
 const MainNavbar = ({ title }) => {
     const { colors } = useTheme();
@@ -112,6 +118,14 @@ export default MainNavbar;
 ```
 
 #### navbar
+
+import and use.
+| Property          | Type                                    | Description                                                                         |
+|-------------------|-----------------------------------------|-------------------------------------------------------------------------------------|
+| `title`           | `string`                                | The title to be displayed in the navbar.                                            |
+| `clickAbleFunction`| `() => void`                            | (Optional) Function to be executed when the title is clicked.                        |
+| `style`           | `ViewStyle` or `TextStyle` or `ImageStyle` or `object` | (Optional) Style object or React Native style type to customize the appearance of the title component. |
+| `children`        | `React.ReactNode`                       | (Optional) Additional React elements that can be included as children of the title component. |
 
 ```js
 const NavbarTitleBackButton = ({
