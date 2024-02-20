@@ -1,7 +1,8 @@
 import React from "react";
 
-type Props = {
+export type MainNavbarProps = {
     title: string,
     children?: React.ReactNode
 }
-export default function MainNavbar(props: Props): JSX.Element;
+
+export default function MainNavbar(props: MainNavbarProps): JSX.Element;

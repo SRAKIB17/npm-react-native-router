@@ -1,8 +1,6 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View, } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useTheme } from '../theming/ThemeContext';
-import { assets_images } from '../../assets/assets_images';
-import TouchableHighlightButton from '../../components/button/TouchableHighlightButton';
 
 const MainNavbar = ({
     title,

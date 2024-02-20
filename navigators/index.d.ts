@@ -1,28 +1,21 @@
 import NavigationContainer, { NavigationContainerProps, ThemeColorNameProps, useNavigation } from "./NavigationContainer";
-import { useParams, ParamsProps } from './params/ParamsContext';
-import { useTheme, ThemeProps } from "./theming/ThemeContext";
-import { useRouter, RouterProps } from './router/RouterContext'
-import DrawerContainer, { DrawerProps, userDrawer } from './drawer/DrawerContainer'
-import RenderScreen, { RenderScreenProps, ScreenProps } from './RenderScreen'
+import RenderScreen, { RenderScreenProps, ScreenProps } from './RenderScreen';
+import DrawerContainer, { DrawerProps, userDrawer } from './drawer/DrawerContainer';
+import { ParamsProps, useParams } from './params/ParamsContext';
+import { RouterProps, useRouter } from './router/RouterContext';
+import MainNavbar, { MainNavbarProps } from "./shared/MainNavbar";
 import NavbarTitleBackButton, { NavbarTitleProps } from "./shared/NavbarTitleBackButton";
+import { ThemeProps, useTheme } from "./theming/ThemeContext";
 
 export {
+    DrawerContainer,
+    DrawerProps, MainNavbar,
+    MainNavbarProps,
     NavbarTitleBackButton as Navbar,
     NavbarTitleProps,
     NavigationContainer,
-    NavigationContainerProps,
-    ThemeColorNameProps,
-    useNavigation,
-    useParams,
-    ParamsProps,
-    useTheme,
-    ThemeProps,
-    useRouter,
-    RouterProps,
-    DrawerContainer,
-    DrawerProps,
-    userDrawer,
-    RenderScreen,
-    RenderScreenProps,
-    ScreenProps
-}
+    NavigationContainerProps, ParamsProps, RenderScreen,
+    RenderScreenProps, RouterProps, ScreenProps, ThemeColorNameProps, ThemeProps, useNavigation,
+    useParams, useRouter, useTheme, userDrawer
+};
+
