@@ -1,14 +1,10 @@
 import React from 'react';
 
-export type ParamsProps = {
-    params: { [key: string]: string | number },
-    setParams: (params: { [key: string]: any; }) => void,
-}
+export type ParamsProps = { [key: string]: string | number }
 
 type Props = {
-    value: { [key: string]: string | number },
+    value: ParamsProps,
     children: React.ReactNode,
-    setParams: (params: { [key: string]: any; }) => void,
 };
 
 export const useParams: () => ParamsProps;

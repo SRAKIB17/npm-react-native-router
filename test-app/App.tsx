@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Animated, PanResponder, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { PressableButton, StyledText } from './components';
-import { DrawerContainer, MainNavbar, NavigationContainer, RenderScreen, useRouter, useTheme, useNavigation, } from './navigators';
+import { DrawerContainer, MainNavbar, NavigationContainer, RenderScreen, useRouter, useTheme, useNavigation, useParams, } from './navigators';
 
 
 export default function App() {
@@ -17,8 +17,8 @@ export default function App() {
 
 const WrapScreen = () => {
   const { dark, colors } = useTheme();
-  const x = useNavigation()
-  console.log(x)
+  const { setParams } = useParams()
+  // console.log(setParams({ t: 345 }))
   return (
     <DrawerContainer>
       <StatusBar

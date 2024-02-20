@@ -50,7 +50,7 @@ export default function NavigationContainer({
                         config: config,
                         setAllParams: setAllParams,
                     }}>
-                        <ParamsProvider setParams={setAllParams} value={params}>
+                        <ParamsProvider value={params}>
                             {children}
                         </ParamsProvider>
                     </RenderContext.Provider>
