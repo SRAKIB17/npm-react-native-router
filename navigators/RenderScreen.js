@@ -94,8 +94,12 @@ export default class RenderScreen {
                 setTitle(findScreen?.props?.title);
 
                 return () => {
+                    rest.params = params;
+                    setTitle(findScreen?.props?.title);
+                    setAllParams(params);
                 }
             }, [path, asPath])
+
 
 
             const Render = findScreen?.props?.screen || function () {
@@ -198,10 +202,13 @@ export default class RenderScreen {
             })
 
             useEffect(() => {
-                setAllParams(params)
-                rest.params = params
+                setAllParams(params);
+                rest.params = params;
                 setTitle(children?.props?.title);
                 return () => {
+                    setAllParams(params);
+                    rest.params = params;
+                    setTitle(children?.props?.title);
                 }
             }, [path, asPath])
 

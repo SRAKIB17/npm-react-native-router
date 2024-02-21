@@ -102,6 +102,9 @@ export default class RenderScreen {
                 setTitle(findScreen?.props?.title);
 
                 return () => {
+                    rest.params = params;
+                    setTitle(findScreen?.props?.title);
+                    setAllParams(params);
                 }
             }, [path, asPath])
 
@@ -205,10 +208,13 @@ export default class RenderScreen {
                 urlPattern: children?.props?.path
             })
             useEffect(() => {
-                setAllParams(params)
-                rest.params = params
+                setAllParams(params);
+                rest.params = params;
                 setTitle(children?.props?.title);
                 return () => {
+                    setAllParams(params);
+                    rest.params = params;
+                    setTitle(children?.props?.title);
                 }
             }, [path, asPath])
 
