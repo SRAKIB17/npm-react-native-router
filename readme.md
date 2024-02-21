@@ -883,6 +883,30 @@ const params = useParams()
 ```
 
 ```js
+ const Home = (props: ScreenProps) => {
+  const params = props?.params;
+  console.log(params)
+  const router = useRouter()
+  return (
+    <View>
+      <Text>
+        Home
+      </Text>
+      <Link href="/settings/435345?search=5435&query=45435&done=true#done">
+        Settings
+      </Link>
+      <Button
+        title='Settings'
+        onPress={() => {
+          router.push('/settings/435345?search=5435&query=45435&done=true#done')
+        }}
+      />
+    </View>
+  )
+}
+```
+
+```js
 {
   blogID:53455,
   title:"Title"
@@ -915,6 +939,7 @@ const params = useParams()
 
 ```js
  const Home = (props: ScreenProps) => {
+  const params = props?.params
   const router = useRouter()
   return (
     <View>
