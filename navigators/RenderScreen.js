@@ -39,12 +39,12 @@ export default class RenderScreen {
 
         const rest = {
             params,
+            setTitle,
             customDynamicNavbar,
             setCustomDynamicNavbar,
             loadingComponent,
             setLoadingComponent,
         }
-
         const [fadeAnim] = useState(new Animated.Value(0)); // Initial opacity: 0
 
         useEffect(() => {

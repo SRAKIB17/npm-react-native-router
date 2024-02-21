@@ -47,6 +47,7 @@ export default class RenderScreen {
 
         const rest = {
             params,
+            setTitle,
             customDynamicNavbar,
             setCustomDynamicNavbar,
             loadingComponent,

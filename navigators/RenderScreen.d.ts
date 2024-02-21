@@ -19,6 +19,7 @@ export type RenderScreenProps = {
 
 export type ScreenProps = {
     loadingComponent: boolean,
+    setTitle: (title: string) => void,
     setLoadingComponent: React.Dispatch<React.SetStateAction<boolean>>,
     customDynamicNavbar: React.ReactNode,
     setCustomDynamicNavbar: React.Dispatch<React.SetStateAction<React.ReactNode>>,
