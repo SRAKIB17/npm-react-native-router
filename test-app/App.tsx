@@ -1,8 +1,6 @@
-import React, { useRef } from 'react';
-import { Animated, PanResponder, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
-import { PressableButton, StyledText } from './components';
-import { DrawerContainer, MainNavbar, NavigationContainer, RenderScreen, useRouter, useTheme, useNavigation, useParams, } from './navigators';
-
+import { StatusBar, View } from 'react-native';
+import { DrawerContainer, MainNavbar, NavbarTitleBackButton, NavigationContainer, RenderScreen, useRouter, useTheme } from './navigators';
+import { PressableButton } from './components';
 
 export default function App() {
   return (
@@ -17,8 +15,6 @@ export default function App() {
 
 const WrapScreen = () => {
   const { dark, colors } = useTheme();
-  const { setParams } = useParams()
-  // console.log(setParams({ t: 345 }))
   return (
     <DrawerContainer>
       <StatusBar
@@ -67,13 +63,11 @@ function Screen(): JSX.Element {
 }
 
 const Home = () => {
-  const router = useRouter();
-
+  const router = useRouter()
   return (
-    <ScrollView>
+    <View>
       <PressableButton text={"About"} onPress={() => { router.push('/about') }} />
-      <CustomDrawer />
-    </ScrollView>
+    </View>
   )
 }
 const About = () => {
@@ -93,82 +87,3 @@ const Settings = () => {
     </View>
   )
 }
-
-
-const CustomDrawer = () => {
-  const drawerWidth = 300;
-  const offsetX = useRef(new Animated.Value(-drawerWidth)).current;
-  const panResponder = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onPanResponderMove: (_, gestureState) => {
-        offsetX.setValue(gestureState.dx);
-      },
-      onPanResponderRelease: (_, gestureState) => {
-        if (gestureState.dx < -100) {
-          // Close drawer
-          Animated.timing(offsetX, {
-            toValue: -drawerWidth,
-            duration: 300,
-            useNativeDriver: false,
-          }).start();
-        } else {
-          // Open drawer
-          Animated.timing(offsetX, {
-            toValue: 0,
-            duration: 300,
-            useNativeDriver: false,
-          }).start();
-        }
-      },
-    })
-  ).current;
-
-
-  return (
-    <View style={styles.container}>
-      <Animated.View
-        style={[
-          styles.drawer,
-          {
-            transform: [{ translateX: offsetX }],
-          },
-        ]}
-        {...panResponder.panHandlers}
-      >
-        <StyledText>
-          Drawer Content
-        </StyledText>
-      </Animated.View>
-      <View style={styles.mainContent}>
-        <Text>Main Content</Text>
-      </View>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-  drawer: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    width: 300, // Change as needed
-    backgroundColor: '#fff',
-    borderRightWidth: 1,
-    borderColor: '#ccc',
-    zIndex: 1,
-    elevation: 5,
-  },
-  mainContent: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f0f0f0',
-  },
-});
-

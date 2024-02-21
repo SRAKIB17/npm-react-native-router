@@ -8,20 +8,19 @@ const ParamsContext = createContext<ParamsProps>({});
 
 
 type Props = {
-    value: { [key: string]: string | number },
-    children: React.ReactNode,
-    setParams: (params: { [key: string]: any; }) => void,
+    value: ParamsProps;
+    children: React.ReactNode;
 };
 
-export function ParamsProvider({ value, children, setParams }: Props) {
+export function ParamsProvider({ value, children }: Props) {
     return (
-        <ParamsContext.Provider value={{ params: value, setParams: setParams }}>
+        <ParamsContext.Provider value={value}>
             {children}
         </ParamsContext.Provider>
     );
 }
 
 export function useParams() {
-    const params = useContext(ParamsContext);
-    return params;
+    const theme = useContext(ParamsContext);
+    return theme;
 }
