@@ -548,6 +548,15 @@ const Home = (props: ScreenProps) => {
 
 ```
 
+| Property                 | Type                                                             | Description                                                   |
+|--------------------------|------------------------------------------------------------------|---------------------------------------------------------------|
+| `loadingComponent`       | `boolean`                                                        | Represents whether a loading component should be displayed.  |
+| `setTitle`               | `(title: string) => void`                                        | Function to set the title of the component or page.          |
+| `setLoadingComponent`    | `React.Dispatch<React.SetStateAction<boolean>>`                  | Setter function for updating the loadingComponent state.     |
+| `customDynamicNavbar`    | `React.ReactNode`                                                | Custom React node representing a dynamic navigation bar.     |
+| `setCustomDynamicNavbar` | `React.Dispatch<React.SetStateAction<React.ReactNode>>`          | Setter function for updating the customDynamicNavbar state.  |
+| `params`                 | `{ [key: string]: any }`                                        | An object containing key-value pairs for additional parameters. |
+
 #### Open drawer handler
 
 ```js
