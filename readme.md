@@ -829,7 +829,7 @@ export default function NotFound(props: ScreenProps) {
 
 ```
 
-```js
+```typescript
 const Home = (props: ScreenProps) => {
   const router = useRouter()
   return (
@@ -849,7 +849,6 @@ const Home = (props: ScreenProps) => {
     </View>
   )
 }
-
 ```
 
 ### Dynamic screen
