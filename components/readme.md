@@ -35,7 +35,7 @@
 | `text` (optional) | `string | number`                                   | The text or label to be displayed on the button.                                                                    |
 | `onPress` (optional) | `() => void`                                 | A function to be executed when the button is pressed.                                                               |
 | `disableStyle` (optional) | `ViewStyle | TextStyle | ImageStyle | object` | Styling for the button when it's disabled.                                                                |
-| `containerStyle` (optional) | `object | any`             | Additional container style for the button.                                                                           |
+| `containerStyle` (optional) | `ViewStyle | TextStyle | ImageStyle | object`             | Additional container style for the button.                                                                           |
 | `disabled` (optional) | `boolean`                                   | If `true`, the button is in a disabled state.                                                                        |
 | `image` (optional) | `any`                                      | An image component or source to be displayed on the button.                                                          |
 | `image_url` (optional) | `string`                                | URL or source for the image to be displayed on the button.                                                           |

@@ -5,7 +5,7 @@ export type ButtonProps = {
     text?: string | number,
     onPress?: () => void,
     disableStyle?: ViewStyle | TextStyle | ImageStyle | object,
-    containerStyle?: object | any;
+    containerStyle?: object | ViewStyle | TextStyle | ImageStyle | object;
     disabled?: boolean,
     image?: any,
     image_url?: any,
