@@ -9,6 +9,7 @@ export default function TouchableOpacityButton({
     onPress,
     disableStyle,
     containerStyle,
+    numberOfLines,
     disabled = false,
     image = 0,
     image_url = '',
@@ -70,7 +71,7 @@ export default function TouchableOpacityButton({
                 <View>
                     {
                         Boolean(text) &&
-                        <StyledText style={[global_styles.text_lg, textStyle]}>
+                        <StyledText numberOfLines={numberOfLines} style={[global_styles.text_lg, textStyle]}>
                             {
                                 text
                             }

@@ -8,6 +8,7 @@ export type ButtonProps = {
     containerStyle?: ViewStyle | TextStyle | ImageStyle | object;
     disabled?: boolean,
     image?: any,
+    numberOfLines?: number,
     image_url?: any,
     imageStyle?: ViewStyle | TextStyle | ImageStyle | object,
     textStyle?: ViewStyle | TextStyle | ImageStyle | object,

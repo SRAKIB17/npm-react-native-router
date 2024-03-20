@@ -11,6 +11,7 @@ export default function PressableButton({
     disableStyle,
     onPress,
     containerStyle,
+    numberOfLines,
     disabled = false, image = 0, image_url = '', imageStyle
     , textStyle
 }: ButtonProps) {
@@ -69,7 +70,7 @@ export default function PressableButton({
                 <View>
                     {
                         Boolean(text) &&
-                        <StyledText style={[global_styles.text_lg, textStyle]}>
+                        <StyledText numberOfLines={numberOfLines} style={[global_styles.text_lg, textStyle]}>
                             {
                                 text
                             }
