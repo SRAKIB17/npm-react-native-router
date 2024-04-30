@@ -103,8 +103,7 @@ const RouterProvider = ({ basePath, children, setLoadingComponent, title }) => {
 const urlParse = ({ url = '' }) => {
     const queryRegex = /\?([^#]*)/;
     const authRegex = /\/\/(?:([^:]+)(?::([^@]+)))?/;
-    // const pathnameRegex = /(?:^[^:]+:\/\/[^/]+)?(\/[^?#]*)/;
-    const pathnameRegex = /(?:^[^:]+:\/\/[^/]+)?(\/[^?#\/]*)/; // ! for without last slice: /
+    const pathnameRegex = /(?:^[^:]+:\/\/[^/]+)?(\/[^?#]*)/;
 
     const portRegex = /:(\d+)/;
     const hashRegex = /#([^]*)/;
