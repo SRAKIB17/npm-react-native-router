@@ -324,8 +324,14 @@ const getParams = ({ urlPattern, path }) => {
                     [key?.slice(2)]: parameterValues[index]
                 }
             })
-            return Object?.assign({}, ...paramsKeyValue);
-
+            if (paramsKeyValue?.length) {
+                return paramsKeyValue.reduce(function (total, value) {
+                    return { ...total, ...value }
+                }, {});
+            }
+            else {
+                return {}
+            }
         } else {
             // console.log("Path does not match the expected pattern.");
             return {}
