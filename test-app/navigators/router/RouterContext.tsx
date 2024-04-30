@@ -122,7 +122,9 @@ export const urlParse = ({ url = "" }: { url: string }) => {
 
     const queryRegex = /\?([^#]*)/,
         authRegex = /\/\/(?:([^:]+)(?::([^@]+)))?/,
-        pathnameRegex = /(?:^[^:]+:\/\/[^/]+)?(\/[^?#]*)/,
+        // pathnameRegex = /(?:^[^:]+:\/\/[^/]+)?(\/[^?#]*)/,
+        pathnameRegex = /(?:^[^:]+:\/\/[^/]+)?(\/[^?#\/]*)/, // ! for without last slice: /
+
         portRegex = /:(\d+)/,
         hashRegex = /#([^]*)/,
         protocolRegex = /^(?:([^:]+):\/\/)?(?:([^:]+))/,
