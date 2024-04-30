@@ -111,18 +111,24 @@ const urlParse = ({ url = '' }) => {
     const urlRegex = /^(?:(\w+):\/\/)?(?:([^:]+)(?::([^@]+))?@)?([a-zA-Z0-9.-]+|(?:\d{1,3}\.){3}\d{1,3}|\[[a-fA-F0-9:]+\])(?::(\d+))?(\/[^?#]*)?(\?[^#]*)?(#.*)?$/;
 
     function query() {
+        // Extract the query part of the URL
         const queryMatch = url.match(queryRegex);
         if (queryMatch && queryMatch[1]) {
             const queryPart = decodeURIComponent(queryMatch[1]);
-            const keyValuePairs = queryPart.split('&');
-            const queryParameters = keyValuePairs.reduce((paramsObj, keyValue) => {
+            // Split the query into individual key-value pairs
+            const keyValuePairs = queryPart.split('&')
+            const paramsObj = keyValuePairs?.map(keyValue => {
                 const [key, value] = keyValue.split('=');
-                paramsObj[key] = value;
-                return paramsObj;
+                return {
+                    [key]: value
+                }
+            });
+            return paramsObj.reduce(function (total, value) {
+                return { ...total, ...value }
             }, {});
-            return queryParameters;
+
         } else {
-            return {};
+            return {}
         }
     }
 

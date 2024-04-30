@@ -127,9 +127,10 @@ export const urlParse = ({ url = "" }: { url: string }) => {
         hashRegex = /#([^]*)/,
         protocolRegex = /^(?:([^:]+):\/\/)?(?:([^:]+))/,
         urlRegex = /^(?:(\w+):\/\/)?(?:([^:]+)(?::([^@]+))?@)?([a-zA-Z0-9.-]+|(?:\d{1,3}\.){3}\d{1,3}|\[[a-fA-F0-9:]+\])(?::(\d+))?(\/[^?#]*)?(\?[^#]*)?(#.*)?$/;
+
     function query() {
         // Extract the query part of the URL
-        const queryMatch = url?.match(queryRegex);
+        const queryMatch = url.match(queryRegex);
         if (queryMatch && queryMatch[1]) {
             const queryPart = decodeURIComponent(queryMatch[1]);
             // Split the query into individual key-value pairs
@@ -139,9 +140,11 @@ export const urlParse = ({ url = "" }: { url: string }) => {
                 return {
                     [key]: value
                 }
-            })
-            const queryParameters = Object.assign({}, ...paramsObj);
-            return queryParameters
+            });
+            return paramsObj.reduce(function (total: any, value: any) {
+                return { ...total, ...value }
+            }, {});
+
         } else {
             return {}
         }
