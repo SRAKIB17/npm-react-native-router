@@ -16,7 +16,7 @@ import {
     RouterProps,
     NavigationProviderProps,
     ThemeProps
-} from "./type/types";
+} from "./types/types";
 
 export {
     DrawerContainer,

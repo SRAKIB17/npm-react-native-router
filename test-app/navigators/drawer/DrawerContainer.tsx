@@ -4,7 +4,7 @@ import {
     ScrollView,
 } from 'react-native';
 
-import { DrawerProps } from '../type/types';
+import { DrawerProps } from '../types/types';
 type drawerContainer = {
     drawerWidth?: number,
     drawerPosition?: "left" | "right" | undefined,

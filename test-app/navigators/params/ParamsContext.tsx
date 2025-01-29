@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from 'react';
-import { ParamsProps } from '../type/types';
+import { ParamsProps } from '../types/types';
 
 
 const ParamsContext = createContext<ParamsProps>({});

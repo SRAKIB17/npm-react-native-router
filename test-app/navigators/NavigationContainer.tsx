@@ -1,10 +1,10 @@
-import React, { PropsWithChildren, createContext, useEffect, useRef, useState, useContext } from 'react';
-import { NavigationProviderProps, ThemeColorNameProps, ThemeProps } from './type/types';
+import React, { createContext, useContext, useRef, useState } from 'react';
 import { ParamsProvider } from './params/ParamsContext';
 import { RouterProvider } from './router/RouterContext';
 import { ThemeProvider } from './theming/ThemeContext';
+import { NavigationProviderProps, ThemeColorNameProps } from './types/types';
 
-interface NavigationContainerPropsType {
+export interface NavigationContainerPropsType {
     setAllParams: React.Dispatch<React.SetStateAction<{}>>,
     params: {
         [key: string]: any
@@ -16,12 +16,14 @@ interface NavigationContainerPropsType {
         footer?: React.ReactNode | React.JSX.Element,
     }
 }
+
 const RenderContext = createContext<NavigationContainerPropsType>({
     setAllParams: () => { },
     setTitle: () => { },
     config: {},
     params: {},
 })
+
 const NavigationContext = createContext<NavigationProviderProps>({
     loadingComponent: false,
     setLoadingComponent: () => { },
@@ -55,12 +57,7 @@ export default function NavigationContainer({
     }>({});
     const [loadingComponent, setLoadingComponent] = useState<boolean>(false);
     const [customDynamicNavbar, setCustomDynamicNavbar] = useState<React.ReactNode>(undefined)
-
-
-
     const navigationStack = useRef([]); // Manually manage navigation stack
-
-
 
     return (
         <NavigationContext.Provider

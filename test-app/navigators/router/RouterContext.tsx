@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 
 import { Alert, BackHandler } from 'react-native';
-import { RouterProps } from '../type/types';
+import { RouterProps } from '../types/types';
 
 const RouterContext = createContext<RouterProps>({
     hash: "",
@@ -150,16 +150,16 @@ export const urlParse = ({ url = "" }: { url: string }) => {
         }
     }
 
-    const matches = url?.match(urlRegex);
-    const hashMatch = url?.match(hashRegex);
+    const matches = url.match(urlRegex);
+    const hashMatch = url.match(hashRegex);
     const hash = hashMatch && hashMatch[1] || null;
     const protocol = matches && matches[1] || null;
     const username = matches && matches[2] || null;
     const password = matches && matches[3] || null;
     const hostname = matches && matches[4] || null;
     const port = matches && matches[5] || null;
-    const path = url?.match(pathnameRegex)?.[1] || null;
 
+    const path = url?.match(pathnameRegex)?.[1] || null;
     const origin = matches && (
         hostname ?
             (
@@ -169,15 +169,16 @@ export const urlParse = ({ url = "" }: { url: string }) => {
             )
             : null
     ) || null
+
     return {
         path,
-        asPath: url,
         hash,
         protocol,
         origin,
         username,
         password,
         hostname,
+        href: url,
         port,
         query: query(),
     }

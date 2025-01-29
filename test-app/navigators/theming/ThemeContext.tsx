@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { ThemeColor } from './theme';
-import { ThemeColorNameProps, ThemeProps } from '../type/types';
+import { ThemeColorNameProps, ThemeProps } from '../types/types';
 
 const ThemeContext = createContext<ThemeProps>(ThemeColor?.dark);
 

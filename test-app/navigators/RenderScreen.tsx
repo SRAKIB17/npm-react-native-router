@@ -9,7 +9,7 @@ import Footer from './shared/Footer';
 import MainNavbar from './shared/MainNavbar';
 import NavbarTitleBackButton from './shared/NavbarTitleBackButton';
 import { useTheme } from './theming/ThemeContext';
-import { RenderScreenProps } from './type/types';
+import { RenderScreenProps } from './types/types';
 
 type arrayProps = {
     children: RenderScreenProps
@@ -310,7 +310,11 @@ export default class RenderScreen {
         }
     }
 
-    screen({ screen, path: link, hasNavbar = true }: RenderScreenProps) {
+    screen({
+        screen,
+        path: link,
+        hasNavbar = true
+    }: RenderScreenProps) {
         return null
     }
 }
