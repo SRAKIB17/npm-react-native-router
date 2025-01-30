@@ -37,24 +37,23 @@ exports.ThemeProvider = ThemeProvider;
 exports.useTheme = useTheme;
 const react_1 = __importStar(require("react"));
 const theme_1 = require("./theme");
-const ThemeContext = (0, react_1.createContext)(theme_1.ThemeColor === null || theme_1.ThemeColor === void 0 ? void 0 : theme_1.ThemeColor.dark);
+const ThemeContext = (0, react_1.createContext)(theme_1.ThemeColor === null || theme_1.ThemeColor === void 0 ? void 0 : theme_1.ThemeColor.default);
 function ThemeProvider({ scheme, theme, children }) {
     const [getThemes, setGetThemes] = (0, react_1.useState)(theme_1.ThemeColor);
-    // const getTheme = ThemeColor?.dark;
     (0, react_1.useEffect)(() => {
-        var _a, _b, _c;
+        var _a, _b;
         // setGetThemes(ThemeColor?.dark)
-        if (theme && ((_a = Object.values(theme)) === null || _a === void 0 ? void 0 : _a.length)) {
+        if (theme && ((theme === null || theme === void 0 ? void 0 : theme.dark) || (theme === null || theme === void 0 ? void 0 : theme.default))) {
             const dark = (theme === null || theme === void 0 ? void 0 : theme.dark) || {};
             const defaultColor = (theme === null || theme === void 0 ? void 0 : theme.default) || {};
             setGetThemes({
                 dark: {
                     dark: true,
-                    colors: Object.assign(Object.assign({}, (_b = theme_1.ThemeColor === null || theme_1.ThemeColor === void 0 ? void 0 : theme_1.ThemeColor.dark) === null || _b === void 0 ? void 0 : _b.colors), dark)
+                    colors: Object.assign(Object.assign({}, (_a = theme_1.ThemeColor === null || theme_1.ThemeColor === void 0 ? void 0 : theme_1.ThemeColor.dark) === null || _a === void 0 ? void 0 : _a.colors), dark)
                 },
                 default: {
                     dark: false,
-                    colors: Object.assign(Object.assign({}, (_c = theme_1.ThemeColor === null || theme_1.ThemeColor === void 0 ? void 0 : theme_1.ThemeColor.default) === null || _c === void 0 ? void 0 : _c.colors), defaultColor)
+                    colors: Object.assign(Object.assign({}, (_b = theme_1.ThemeColor === null || theme_1.ThemeColor === void 0 ? void 0 : theme_1.ThemeColor.default) === null || _b === void 0 ? void 0 : _b.colors), defaultColor)
                 }
             });
         }

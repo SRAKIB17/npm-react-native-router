@@ -1,4 +1,37 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -6,39 +39,43 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = Root;
 const react_1 = __importDefault(require("react"));
 const react_native_1 = require("react-native");
-const navigation_1 = __importDefault(require("./@dbnx/navigation"));
-const navigators_1 = require("./navigators");
-const app = new navigation_1.default('/');
-const Router = app.Router;
+const navigation_1 = __importStar(require("./test/navigation"));
+const Screen_1 = __importDefault(require("./test/navigation/Screen"));
+const app = new navigation_1.default('/home');
+const Router = () => app.Router({
+    router: [
+        {
+            path: '/home/',
+            title: 'Home',
+            screen: Home,
+        },
+        {
+            path: '/about',
+            title: 'About',
+            screen: About,
+        },
+        {
+            path: '/settings',
+            title: 'Settings',
+            screen: Settings,
+        }
+    ]
+});
 function Root() {
-    return (react_1.default.createElement(react_native_1.View, { style: { padding: 100 } },
-        react_1.default.createElement(Router, { router: [
-                {
-                    path: '/home',
-                    title: 'Home',
-                    screen: Home,
-                },
-            ] }))
-    // <NavigationContainer
-    //   // scheme={scheme !== 'dark' ? 'dark' : 'default'}
-    //   basePath={'/home'}
-    // >
-    //   <WrapScreen />
-    // </NavigationContainer>
-    );
+    return (react_1.default.createElement(navigation_1.NavigationContainer, null,
+        react_1.default.createElement(Screen, null),
+        react_1.default.createElement(react_native_1.View, { style: { padding: 100 } },
+            react_1.default.createElement(Router, null))));
 }
-const WrapScreen = () => {
-    const { dark, colors } = (0, navigators_1.useTheme)();
-    return (react_1.default.createElement(navigators_1.DrawerContainer, null,
-        react_1.default.createElement(react_native_1.StatusBar, { animated: true, barStyle: dark ? "light-content" : 'dark-content', backgroundColor: colors.card, showHideTransition: 'slide', hidden: false }),
-        react_1.default.createElement(Screen, null)));
-};
 function Screen() {
-    const Render = new navigators_1.RenderScreen();
+    const Render = new Screen_1.default();
     return (react_1.default.createElement(Render.Render, null,
         react_1.default.createElement(Render.screen, { path: '/home', title: 'Home', 
             // hasNavbar={true}
-            navbar: react_1.default.createElement(navigators_1.MainNavbar, { title: 'Ahliya', children: react_1.default.createElement(Home, null) }), isPrivate: true, privateState: true, screen: Home }),
+            // navbar={<MainNavbar
+            //   title='Ahliya' children={<Home />}
+            // />}
+            isPrivate: true, privateState: true, screen: Home }),
         react_1.default.createElement(Render.screen, { title: 'Settings', 
             // hasNavbar={true}
             path: '/settings', screen: Settings }),
@@ -49,21 +86,21 @@ function Screen() {
 const Home = ({ navigate }) => {
     return (react_1.default.createElement(react_native_1.View, { style: styles.container },
         react_1.default.createElement(react_native_1.Text, { style: styles.title }, "\uD83C\uDFE0 Home"),
-        react_1.default.createElement(react_native_1.TouchableOpacity, { style: styles.button, onPress: () => navigate("About") },
+        react_1.default.createElement(react_native_1.TouchableOpacity, { style: styles.button, onPress: () => navigate("/about") },
             react_1.default.createElement(react_native_1.Text, { style: styles.buttonText }, "Go to About")),
-        react_1.default.createElement(react_native_1.TouchableOpacity, { style: styles.button, onPress: () => navigate("Settings") },
+        react_1.default.createElement(react_native_1.TouchableOpacity, { style: styles.button, onPress: () => navigate("/settings") },
             react_1.default.createElement(react_native_1.Text, { style: styles.buttonText }, "Go to Settings"))));
 };
 const About = ({ navigate }) => {
     return (react_1.default.createElement(react_native_1.View, { style: styles.container },
         react_1.default.createElement(react_native_1.Text, { style: styles.title }, "\u2139\uFE0F About"),
-        react_1.default.createElement(react_native_1.TouchableOpacity, { style: styles.button, onPress: () => navigate("Home") },
+        react_1.default.createElement(react_native_1.TouchableOpacity, { style: styles.button, onPress: () => navigate("/home") },
             react_1.default.createElement(react_native_1.Text, { style: styles.buttonText }, "Back to Home"))));
 };
 const Settings = ({ navigate }) => {
     return (react_1.default.createElement(react_native_1.View, { style: styles.container },
         react_1.default.createElement(react_native_1.Text, { style: styles.title }, "\u2699\uFE0F Settings"),
-        react_1.default.createElement(react_native_1.TouchableOpacity, { style: styles.button, onPress: () => navigate("Home") },
+        react_1.default.createElement(react_native_1.TouchableOpacity, { style: styles.button, onPress: () => navigate("/home") },
             react_1.default.createElement(react_native_1.Text, { style: styles.buttonText }, "Back to Home"))));
 };
 const styles = react_native_1.StyleSheet.create({

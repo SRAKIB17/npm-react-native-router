@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import type { SchemeThemeProps, ThemeColorNameProps, ThemeProps } from '../types';
 import { ThemeColor } from './theme';
-import { ThemeColorNameProps, ThemeProps } from '../types/types';
 
-const ThemeContext = createContext<ThemeProps>(ThemeColor?.dark);
+const ThemeContext = createContext<ThemeProps>(ThemeColor?.default);
 
 
 type Props = {
@@ -20,11 +20,11 @@ export function ThemeProvider({
     children
 }: Props) {
 
-    const [getThemes, setGetThemes] = useState(ThemeColor)
-    // const getTheme = ThemeColor?.dark;
+    const [getThemes, setGetThemes] = useState(ThemeColor);
+
     useEffect(() => {
         // setGetThemes(ThemeColor?.dark)
-        if (theme && Object.values(theme)?.length) {
+        if (theme && (theme?.dark || theme?.default)) {
             const dark = theme?.dark || {}
             const defaultColor = theme?.default || {}
             setGetThemes({
@@ -32,7 +32,7 @@ export function ThemeProvider({
                     dark: true,
                     colors: {
                         ...ThemeColor?.dark?.colors,
-                        ...dark
+                        ...dark,
                     }
                 },
 
@@ -40,7 +40,7 @@ export function ThemeProvider({
                     dark: false,
                     colors: {
                         ...ThemeColor?.default?.colors,
-                        ...defaultColor
+                        ...defaultColor,
                     }
                 }
             })
@@ -48,7 +48,8 @@ export function ThemeProvider({
     }, [scheme])
 
     return (
-        <ThemeContext.Provider value={scheme == 'dark' ? getThemes?.dark : getThemes?.default}>
+        <ThemeContext.Provider value={scheme == 'dark' ? getThemes?.dark : getThemes?.default
+        }>
             {children}
         </ThemeContext.Provider>
     );

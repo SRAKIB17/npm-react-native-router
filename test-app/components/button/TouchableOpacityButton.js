@@ -8,9 +8,9 @@ const react_1 = __importDefault(require("react"));
 const react_native_1 = require("react-native");
 const StyledText_1 = __importDefault(require("../text/StyledText"));
 const global_1 = require("../global");
-const navigators_1 = require("../../navigators");
+const src_1 = require("../../src");
 function TouchableOpacityButton({ text, onPress, disableStyle, containerStyle, disabled = false, image = 0, numberOfLines, image_url = '', imageStyle, textStyle }) {
-    const { colors } = (0, navigators_1.useTheme)();
+    const { colors } = (0, src_1.useTheme)();
     const styles = react_native_1.StyleSheet.create({
         root: {
             backgroundColor: colors.secondary,

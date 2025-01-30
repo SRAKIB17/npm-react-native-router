@@ -42,7 +42,7 @@ const react_native_1 = require("react-native");
 const Toast_1 = __importDefault(require("../toast/Toast"));
 const global_1 = require("../global");
 const StyledText_1 = __importDefault(require("../text/StyledText"));
-const navigators_1 = require("../../navigators");
+const src_1 = require("../../src");
 function Input({ asset, type = "text", defaultValue = '', value, setValue = () => { }, placeholder = 'Write something..', pattern, containerStyle, style = {}, toast = 'Please input valid info', multiline = false, autoFocus = false, }) {
     const [error, setError] = (0, react_1.useState)('');
     const [inputValue, setInputValue] = (0, react_1.useState)('');
@@ -59,7 +59,7 @@ function Input({ asset, type = "text", defaultValue = '', value, setValue = () =
         setValue(text === null || text === void 0 ? void 0 : text.trim());
         setInputValue(text === null || text === void 0 ? void 0 : text.trim());
     };
-    const { colors } = (0, navigators_1.useTheme)();
+    const { colors } = (0, src_1.useTheme)();
     const onBlurHandle = () => {
         if (!(pattern === null || pattern === void 0 ? void 0 : pattern.test(inputValue)) && pattern) {
             setValue('');

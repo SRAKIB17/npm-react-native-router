@@ -9,7 +9,9 @@ const MainNavbar = ({
     children?: React.ReactNode,
     title: string
 }) => {
+
     const { colors } = useTheme()
+
     const styles = StyleSheet.create({
         navbar: {
             display: 'flex',

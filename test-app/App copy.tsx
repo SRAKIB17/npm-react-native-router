@@ -1,68 +1,57 @@
 import React from 'react';
-import { StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import App from './@dbnx/navigation';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import App, { NavigationContainer } from './test/navigation';
+import RenderScreen from './test/navigation/Screen';
 
-import { DrawerContainer, MainNavbar, RenderScreen, useTheme } from './navigators';
-
-const app = new App('/');
-const Router = app.Router
+const app = new App('/home');
+const Router = () => app.Router({
+  router: [
+    {
+      path: '/home/',
+      title: 'Home',
+      screen: Home,
+    },
+    {
+      path: '/about',
+      title: 'About',
+      screen: About,
+    },
+    {
+      path: '/settings',
+      title: 'Settings',
+      screen: Settings,
+    }
+  ]
+});
 
 export default function Root() {
 
   return (
-    <View style={{ padding: 100 }}>
-      <Router
-        router={[
-          {
-            path: '/home',
-            title: 'Home',
-            screen: Home,
-          },
-        ]}
-      />
-    </View>
-    // <NavigationContainer
-    //   // scheme={scheme !== 'dark' ? 'dark' : 'default'}
-    //   basePath={'/home'}
-    // >
-    //   <WrapScreen />
-    // </NavigationContainer>
+    <NavigationContainer>
+      {/* <Header/> */}
+      <Screen />
+      <View style={{ padding: 100 }}>
+        <Router />
+      </View>
+    </NavigationContainer>
   );
 }
-
-const WrapScreen = () => {
-  const { dark, colors } = useTheme();
-  return (
-    <DrawerContainer>
-      <StatusBar
-        animated={true}
-        barStyle={dark ? "light-content" : 'dark-content'}
-        backgroundColor={colors.card}
-        showHideTransition={'slide'}
-        hidden={false}
-      />
-      <Screen />
-    </DrawerContainer>
-  )
-}
-
 
 function Screen(): JSX.Element {
   const Render = new RenderScreen()
   return (
-    <Render.Render >
+    <Render.Render>
       <Render.screen
         path={'/home'}
         title='Home'
         // hasNavbar={true}
-        navbar={<MainNavbar
-          title='Ahliya' children={<Home />}
-        />}
+        // navbar={<MainNavbar
+        //   title='Ahliya' children={<Home />}
+        // />}
         isPrivate={true}
         privateState={true}
         screen={Home}
       />
-
       <Render.screen
         title='Settings'
         // hasNavbar={true}
@@ -84,10 +73,13 @@ const Home = ({ navigate }: { navigate: (screen: string) => void }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>🏠 Home</Text>
-      <TouchableOpacity style={styles.button} onPress={() => navigate("About")}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigate("/about")}
+      >
         <Text style={styles.buttonText}>Go to About</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigate("Settings")}>
+      <TouchableOpacity style={styles.button} onPress={() => navigate("/settings")}>
         <Text style={styles.buttonText}>Go to Settings</Text>
       </TouchableOpacity>
     </View>
@@ -98,7 +90,7 @@ const About = ({ navigate }: { navigate: (screen: string) => void }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>ℹ️ About</Text>
-      <TouchableOpacity style={styles.button} onPress={() => navigate("Home")}>
+      <TouchableOpacity style={styles.button} onPress={() => navigate("/home")}>
         <Text style={styles.buttonText}>Back to Home</Text>
       </TouchableOpacity>
     </View>
@@ -109,7 +101,7 @@ const Settings = ({ navigate }: { navigate: (screen: string) => void }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>⚙️ Settings</Text>
-      <TouchableOpacity style={styles.button} onPress={() => navigate("Home")}>
+      <TouchableOpacity style={styles.button} onPress={() => navigate("/home")}>
         <Text style={styles.buttonText}>Back to Home</Text>
       </TouchableOpacity>
     </View>

@@ -1,8 +1,8 @@
 {
   "name": "test-app",
   "version": "1.0.0",
-  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
+    "build": "npx pkgroll",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",

@@ -39,7 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.StatusBarHeight = void 0;
 const react_1 = __importStar(require("react"));
 const react_native_1 = require("react-native");
-const ThemeContext_1 = require("../../navigators/theming/ThemeContext");
+const ThemeContext_1 = require("../../src/theming/ThemeContext");
 const PressableButton_1 = __importDefault(require("../button/PressableButton"));
 const global_1 = require("../global");
 const Input_1 = __importDefault(require("../input/Input"));

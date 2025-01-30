@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import { useTheme } from "../../navigators";
+import { useTheme } from "../../src";
 import PressableButton from "../button/PressableButton";
 import { global_styles } from "../global";
 

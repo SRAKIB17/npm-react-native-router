@@ -3,7 +3,7 @@ import { Image, ImageStyle, Pressable, StyleSheet, TextStyle, TouchableHighlight
 import StyledText from '../text/StyledText';
 import { global_styles } from '../global';
 import { ButtonProps } from '../types';
-import { useTheme } from '../../navigators';
+import { useTheme } from '../../src';
 
 export default function TouchableOpacityButton({
     text,

@@ -32,45 +32,31 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = Root;
-const react_1 = __importDefault(require("react"));
+const react_1 = __importStar(require("react"));
 const react_native_1 = require("react-native");
-const navigation_1 = __importStar(require("./@dbnx/navigation"));
-const Screen_1 = __importDefault(require("./@dbnx/navigation/Screen"));
-const app = new navigation_1.default('/home');
-const Router = () => app.Router({
-    router: [
-        {
-            path: '/home/',
-            title: 'Home',
-            screen: Home,
-        },
-        {
-            path: '/about',
-            title: 'About',
-            screen: About,
-        },
-        {
-            path: '/settings',
-            title: 'Settings',
-            screen: Settings,
-        }
-    ]
-});
+const src_1 = require("./src");
 function Root() {
-    return (react_1.default.createElement(navigation_1.NavigationContainer, null,
-        react_1.default.createElement(Screen, null),
-        react_1.default.createElement(react_native_1.View, { style: { padding: 100 } },
-            react_1.default.createElement(Router, null))));
+    return (react_1.default.createElement(src_1.NavigationContainer
+    // scheme='dark'
+    // scheme={scheme !== 'dark' ? 'dark' : 'default'}
+    , { 
+        // scheme='dark'
+        // scheme={scheme !== 'dark' ? 'dark' : 'default'}
+        basePath: '/home' },
+        react_1.default.createElement(WrapScreen, null)));
 }
+const WrapScreen = () => {
+    const { dark, colors } = (0, src_1.useTheme)();
+    return (react_1.default.createElement(react_1.default.Fragment, null,
+        react_1.default.createElement(react_native_1.StatusBar, { animated: true, barStyle: dark ? "light-content" : 'dark-content', backgroundColor: colors.card, showHideTransition: 'slide', hidden: false }),
+        react_1.default.createElement(Screen, null)));
+};
 function Screen() {
-    const Render = new Screen_1.default();
+    const Render = new src_1.RenderScreen();
     return (react_1.default.createElement(Render.Render, null,
-        react_1.default.createElement(Render.screen, { path: '/home', title: 'Home', 
+        react_1.default.createElement(Render.screen, { path: '/home', title: 'Home', hasBottomTabs: true, 
             // hasNavbar={true}
             // navbar={<MainNavbar
             //   title='Ahliya' children={<Home />}
@@ -78,26 +64,32 @@ function Screen() {
             isPrivate: true, privateState: true, screen: Home }),
         react_1.default.createElement(Render.screen, { title: 'Settings', 
             // hasNavbar={true}
-            path: '/settings', screen: Settings }),
+            path: '/settings/:setting', screen: Settings }),
         react_1.default.createElement(Render.screen, { title: 'About', 
             // hasNavbar={true}
-            path: '/about', screen: About })));
+            path: '/about/:id', screen: About })));
 }
 const Home = ({ navigate }) => {
     return (react_1.default.createElement(react_native_1.View, { style: styles.container },
         react_1.default.createElement(react_native_1.Text, { style: styles.title }, "\uD83C\uDFE0 Home"),
-        react_1.default.createElement(react_native_1.TouchableOpacity, { style: styles.button, onPress: () => navigate("/about") },
+        react_1.default.createElement(react_native_1.TouchableOpacity, { style: styles.button, onPress: () => navigate(`/x/${new Date().toDateString()}`) },
+            react_1.default.createElement(react_native_1.Text, { style: styles.buttonText }, "Not Found")),
+        react_1.default.createElement(react_native_1.TouchableOpacity, { style: styles.button, onPress: () => navigate(`/about/${new Date().toDateString()}`) },
             react_1.default.createElement(react_native_1.Text, { style: styles.buttonText }, "Go to About")),
-        react_1.default.createElement(react_native_1.TouchableOpacity, { style: styles.button, onPress: () => navigate("/settings") },
+        react_1.default.createElement(react_native_1.TouchableOpacity, { style: styles.button, onPress: () => navigate(`/settings/${new Date().getTime()}`) },
             react_1.default.createElement(react_native_1.Text, { style: styles.buttonText }, "Go to Settings"))));
 };
-const About = ({ navigate }) => {
-    return (react_1.default.createElement(react_native_1.View, { style: styles.container },
+const About = ({ navigate, params, setTitle }) => {
+    const { colors, dark } = (0, src_1.useTheme)();
+    (0, react_1.useEffect)(() => {
+        setTitle('testing');
+    }, []);
+    return (react_1.default.createElement(react_native_1.View, { style: [styles.container, { backgroundColor: colors === null || colors === void 0 ? void 0 : colors.danger }] },
         react_1.default.createElement(react_native_1.Text, { style: styles.title }, "\u2139\uFE0F About"),
         react_1.default.createElement(react_native_1.TouchableOpacity, { style: styles.button, onPress: () => navigate("/home") },
             react_1.default.createElement(react_native_1.Text, { style: styles.buttonText }, "Back to Home"))));
 };
-const Settings = ({ navigate }) => {
+const Settings = ({ navigate, params }) => {
     return (react_1.default.createElement(react_native_1.View, { style: styles.container },
         react_1.default.createElement(react_native_1.Text, { style: styles.title }, "\u2699\uFE0F Settings"),
         react_1.default.createElement(react_native_1.TouchableOpacity, { style: styles.button, onPress: () => navigate("/home") },

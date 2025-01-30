@@ -4,13 +4,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_native_1 = require("react-native");
-const navigators_1 = require("../../navigators");
+const src_1 = require("../../src");
 const PressableButton_1 = __importDefault(require("../button/PressableButton"));
 const global_1 = require("../global");
 const Pagination = ({ pageHandle = () => { }, currentPage, getLastPage, button, disableButton, }) => {
     const page = parseInt(currentPage);
     const lastPage = parseInt(getLastPage);
-    const { colors } = (0, navigators_1.useTheme)();
+    const { colors } = (0, src_1.useTheme)();
     const styles = react_native_1.StyleSheet.create({
         pagination: {
             flexDirection: 'row',

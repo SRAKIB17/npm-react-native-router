@@ -17,13 +17,7 @@ export type RenderScreenProps = {
 
 export default class RenderScreen {
 
-    Render(
-        {
-            children
-        }: {
-            children: { props: any } | any[] | any
-        }
-    ) {
+    Render({ children }: { children: { props: any } | any[] | any }) {
 
         // const {
         //     customDynamicNavbar,

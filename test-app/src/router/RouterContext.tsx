@@ -1,8 +1,7 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
-
 import { Alert, BackHandler } from 'react-native';
-import { RouterProps } from '../types/types';
-
+import type { RouterProps } from '../types';
+import { urlParse } from '../utils/url';
 const RouterContext = createContext<RouterProps>({
     hash: "",
     hostname: "",
@@ -35,10 +34,9 @@ type Props = {
 
 export function RouterProvider({ basePath: basePath, children, setLoadingComponent, title }: Props) {
     const navigationStack = useRef<string[]>([]); // Manually manage navigation stack
-
-    const parseBasePath = urlParse({ url: basePath }).path || ''
+    const parseBasePath = urlParse(basePath).path || ''
     const [screen, setScreen] = useState(parseBasePath);
-    const locationParse = urlParse({ url: screen })
+    const locationParse = urlParse(screen)
 
     class history {
         back = async () => {
@@ -59,14 +57,14 @@ export function RouterProvider({ basePath: basePath, children, setLoadingCompone
         }
     }
 
-    async function push(url: string,
+    async function push(path: string,
         option: {
             title?: string,
         }) {
-        setLoadingComponent(true)
-        setScreen(url)
-        navigationStack.current.push(url)
-        setLoadingComponent(false)
+        // setLoadingComponent(true)
+        setScreen(path)
+        navigationStack.current.push(path)
+        // setLoadingComponent(false)
     }
 
     const historyConstructor: any = new history()
@@ -118,73 +116,9 @@ export function RouterProvider({ basePath: basePath, children, setLoadingCompone
 
 }
 
-export const urlParse = ({ url = "" }: { url: string }) => {
-
-    const queryRegex = /\?([^#]*)/,
-        authRegex = /\/\/(?:([^:]+)(?::([^@]+)))?/,
-        pathnameRegex = /(?:^[^:]+:\/\/[^/]+)?(\/[^?#]*)/,
-        portRegex = /:(\d+)/,
-        hashRegex = /#([^]*)/,
-        protocolRegex = /^(?:([^:]+):\/\/)?(?:([^:]+))/,
-        urlRegex = /^(?:(\w+):\/\/)?(?:([^:]+)(?::([^@]+))?@)?([a-zA-Z0-9.-]+|(?:\d{1,3}\.){3}\d{1,3}|\[[a-fA-F0-9:]+\])(?::(\d+))?(\/[^?#]*)?(\?[^#]*)?(#.*)?$/;
-
-    function query() {
-        // Extract the query part of the URL
-        const queryMatch = url.match(queryRegex);
-        if (queryMatch && queryMatch[1]) {
-            const queryPart = decodeURIComponent(queryMatch[1]);
-            // Split the query into individual key-value pairs
-            const keyValuePairs = queryPart.split('&')
-            const paramsObj: Array<{ [key: string]: any }> = keyValuePairs?.map(keyValue => {
-                const [key, value] = keyValue.split('=');
-                return {
-                    [key]: value
-                }
-            });
-            return paramsObj.reduce(function (total: any, value: any) {
-                return { ...total, ...value }
-            }, {});
-
-        } else {
-            return {}
-        }
-    }
-
-    const matches = url.match(urlRegex);
-    const hashMatch = url.match(hashRegex);
-    const hash = hashMatch && hashMatch[1] || null;
-    const protocol = matches && matches[1] || null;
-    const username = matches && matches[2] || null;
-    const password = matches && matches[3] || null;
-    const hostname = matches && matches[4] || null;
-    const port = matches && matches[5] || null;
-
-    const path = url?.match(pathnameRegex)?.[1] || null;
-    const origin = matches && (
-        hostname ?
-            (
-                protocol ?
-                    `${protocol}://${hostname}${port ? `:${port}` : ""}`
-                    : `${hostname}${port ? `:${port}` : ""}`
-            )
-            : null
-    ) || null
-
-    return {
-        path,
-        hash,
-        protocol,
-        origin,
-        username,
-        password,
-        hostname,
-        href: url,
-        port,
-        query: query(),
-    }
-}
 
 export function useRouter() {
+
     const location = useContext(RouterContext);
     return location;
 }

@@ -4,7 +4,7 @@ import Toast from '../toast/Toast';
 import { global_styles } from '../global';
 import StyledText from '../text/StyledText';
 import { InputProps } from '../types';
-import { useTheme } from '../../navigators';
+import { useTheme } from '../../src';
 
 export default function Input({
     asset,

@@ -33,56 +33,57 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.NavigationContext = exports.NavigationPropertyPass = void 0;
 exports.default = NavigationContainer;
-exports.userRenderContext = userRenderContext;
 exports.useNavigation = useNavigation;
+exports.useParams = useParams;
 const react_1 = __importStar(require("react"));
-const ParamsContext_1 = require("./params/ParamsContext");
 const RouterContext_1 = require("./router/RouterContext");
 const ThemeContext_1 = require("./theming/ThemeContext");
-const RenderContext = (0, react_1.createContext)({
-    setAllParams: () => { },
-    setTitle: () => { },
-    config: {},
-    params: {},
-});
-const NavigationContext = (0, react_1.createContext)({
+class NavigationPropertyPass {
+}
+exports.NavigationPropertyPass = NavigationPropertyPass;
+NavigationPropertyPass.router = [];
+NavigationPropertyPass.basePath = '';
+exports.NavigationContext = (0, react_1.createContext)({
     loadingComponent: false,
+    title: "",
+    setTitle: () => { },
+    NavigationPropertyPass: NavigationPropertyPass,
     setLoadingComponent: () => { },
     customDynamicNavbar: undefined,
     setCustomDynamicNavbar: () => { },
 });
 function NavigationContainer({ children, basePath, theme, config = {}, scheme = 'default', }) {
+    NavigationPropertyPass.basePath = basePath;
+    NavigationPropertyPass.config = config;
     const [title, setTitle] = (0, react_1.useState)('');
-    const [params, setAllParams] = (0, react_1.useState)({});
     const [loadingComponent, setLoadingComponent] = (0, react_1.useState)(false);
     const [customDynamicNavbar, setCustomDynamicNavbar] = (0, react_1.useState)(undefined);
-    const navigationStack = (0, react_1.useRef)([]); // Manually manage navigation stack
-    return (react_1.default.createElement(NavigationContext.Provider, { value: {
+    return (react_1.default.createElement(exports.NavigationContext.Provider, { value: {
+            setTitle,
+            title,
+            NavigationPropertyPass: NavigationPropertyPass,
             customDynamicNavbar: customDynamicNavbar,
             setCustomDynamicNavbar: setCustomDynamicNavbar,
             loadingComponent: loadingComponent,
             setLoadingComponent: setLoadingComponent,
         } },
-        react_1.default.createElement(RouterContext_1.RouterProvider, { title: title, basePath: basePath, setLoadingComponent: setLoadingComponent },
-            react_1.default.createElement(ThemeContext_1.ThemeProvider, { scheme: scheme, theme: theme },
-                react_1.default.createElement(RenderContext.Provider, { value: {
-                        params: params,
-                        setTitle: setTitle,
-                        config: config,
-                        setAllParams: setAllParams,
-                    } },
-                    react_1.default.createElement(ParamsContext_1.ParamsProvider, { value: params }, children))))));
-}
-function userRenderContext() {
-    return (0, react_1.useContext)(RenderContext);
+        react_1.default.createElement(ThemeContext_1.ThemeProvider, { scheme: scheme, theme: theme },
+            react_1.default.createElement(RouterContext_1.RouterProvider, { title: title, basePath: basePath, setLoadingComponent: setLoadingComponent }, children))));
 }
 function useNavigation() {
-    const { customDynamicNavbar, loadingComponent, setLoadingComponent, setCustomDynamicNavbar } = (0, react_1.useContext)(NavigationContext);
+    const { customDynamicNavbar, loadingComponent, setLoadingComponent, setCustomDynamicNavbar, setTitle, title, } = (0, react_1.useContext)(exports.NavigationContext);
     return {
+        setTitle,
+        title,
         customDynamicNavbar,
         loadingComponent,
         setLoadingComponent,
         setCustomDynamicNavbar
     };
+}
+function useParams() {
+    const { NavigationPropertyPass: NavigationProps } = (0, react_1.useContext)(exports.NavigationContext);
+    return NavigationProps.params;
 }

@@ -1,49 +1,49 @@
-import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import App, { NavigationContainer } from './@dbnx/navigation';
-import RenderScreen from './@dbnx/navigation/Screen';
+import React, { useEffect } from 'react';
+import { StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { NavigationContainer, RenderScreen, useTheme } from './src';
+import { ScreenProps } from './src/types';
 
-const app = new App('/home');
-const Router = () => app.Router({
-  router: [
-    {
-      path: '/home/',
-      title: 'Home',
-      screen: Home,
-    },
-    {
-      path: '/about',
-      title: 'About',
-      screen: About,
-    },
-    {
-      path: '/settings',
-      title: 'Settings',
-      screen: Settings,
-    }
-  ]
-});
 
 export default function Root() {
 
   return (
-    <NavigationContainer>
-      {/* <Header/> */}
-      <Screen />
-      <View style={{ padding: 100 }}>
-        <Router />
-      </View>
+    <NavigationContainer
+      // scheme='dark'
+
+      // scheme={scheme !== 'dark' ? 'dark' : 'default'}
+      basePath={'/home'}
+    >
+      <WrapScreen />
     </NavigationContainer>
   );
 }
 
+const WrapScreen = () => {
+  const { dark, colors } = useTheme();
+
+  return (
+    <>
+      <StatusBar
+        animated={true}
+        barStyle={dark ? "light-content" : 'dark-content'}
+        backgroundColor={colors.card}
+        showHideTransition={'slide'}
+        hidden={false}
+      />
+      <Screen />
+    </>
+  )
+}
+
 function Screen(): JSX.Element {
   const Render = new RenderScreen()
+
   return (
     <Render.Render>
       <Render.screen
         path={'/home'}
         title='Home'
+        hasBottomTabs
         // hasNavbar={true}
         // navbar={<MainNavbar
         //   title='Ahliya' children={<Home />}
@@ -55,13 +55,13 @@ function Screen(): JSX.Element {
       <Render.screen
         title='Settings'
         // hasNavbar={true}
-        path={'/settings'}
+        path={'/settings/:setting'}
         screen={Settings}
       />
       <Render.screen
         title='About'
         // hasNavbar={true}
-        path={'/about'}
+        path={'/about/:id'}
         screen={About}
       />
     </Render.Render>
@@ -69,26 +69,36 @@ function Screen(): JSX.Element {
 }
 
 
-const Home = ({ navigate }: { navigate: (screen: string) => void }) => {
+const Home = ({ navigate }: ScreenProps) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>🏠 Home</Text>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigate("/about")}
+        onPress={() => navigate(`/x/${new Date().toDateString()}`)}
+      >
+        <Text style={styles.buttonText}>Not Found</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigate(`/about/${new Date().toDateString()}`)}
       >
         <Text style={styles.buttonText}>Go to About</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigate("/settings")}>
+      <TouchableOpacity style={styles.button} onPress={() => navigate(`/settings/${new Date().getTime()}`)}>
         <Text style={styles.buttonText}>Go to Settings</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-const About = ({ navigate }: { navigate: (screen: string) => void }) => {
+const About = ({ navigate, params, setTitle }: ScreenProps) => {
+  const { colors, dark } = useTheme();
+  useEffect(() => {
+    setTitle('testing')
+  }, [])
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors?.danger }]}>
       <Text style={styles.title}>ℹ️ About</Text>
       <TouchableOpacity style={styles.button} onPress={() => navigate("/home")}>
         <Text style={styles.buttonText}>Back to Home</Text>
@@ -97,7 +107,7 @@ const About = ({ navigate }: { navigate: (screen: string) => void }) => {
   );
 };
 
-const Settings = ({ navigate }: { navigate: (screen: string) => void }) => {
+const Settings = ({ navigate, params }: ScreenProps) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>⚙️ Settings</Text>

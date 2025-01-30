@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, } from 'react-native';
-import { useRouter, useTheme } from '../../navigators';
+import { useRouter, useTheme } from '../../src';
 import StyledText from '../text/StyledText';
 import { LinkProps } from '../types';
 
