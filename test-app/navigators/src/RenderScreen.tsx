@@ -46,11 +46,9 @@ export default class RenderScreen {
             params: NavigationProps?.params,
             navigate: push,
             setTitle: (t: string) => {
-                console.log(props_title)
                 props_title = t;
-                console.log(t)
                 // setTitle(t);
-                setTitle(t)
+                console.log
             },
             isLoading,
             setLoading,
@@ -60,6 +58,7 @@ export default class RenderScreen {
             // setCustomDynamicNavbar,
             // setLoadingComponent,
         }
+
 
         // const [fadeAnim] = useState(new Animated.Value(0)); // Initial opacity: 0
 
@@ -112,7 +111,7 @@ export default class RenderScreen {
                 }
                 else {
                     console.log(props_title, 'xxxxxxx')
-                    props_title = findScreen?.props?.title;
+                    // props_title = findScreen?.props?.title
                     setTitle(findScreen?.props?.title);
                 }
             }, [path, asPath, props_title])

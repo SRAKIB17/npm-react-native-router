@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { assets_images } from './assets/assets_images';
 import { BottomTabs, HeaderBar, LoadingOverlay, MainHeader, NavigationContainer, RenderScreen, ScreenProps, useNavigation, useRouter, useTheme } from './navigators';
@@ -165,14 +165,17 @@ const Home = ({ navigate }: ScreenProps) => {
 
 const About = ({ navigate, params, setLoadingScreen, setTitle, title, setLoading, isLoading }: ScreenProps) => {
   const { colors, dark } = useTheme();
+  const [t, setT] = useState<string>('sfsdfff')
+  const navig = useNavigation();
 
   // useEffect(() => {
-  setTitle('testing')
+  //   setTitle(t)
   // }, [])
 
 
   const fet = () => {
-    setTitle("😍😍😍😍😍😍")
+    navig.setTitle("❤️❤️❤️❤️❤️")
+    // setTitle("😍😍😍😍😍😍")
   }
 
   // const fet = () => {
