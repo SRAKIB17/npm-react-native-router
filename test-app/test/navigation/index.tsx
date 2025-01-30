@@ -74,7 +74,6 @@ export default class App {
     }
     navigate = (path: string) => {
         this.#basePath = path;
-        console.log(this.#basePath);
         this.#location = urlParse(this.#basePath);
         this.Router({ router: this.#router });
     }
@@ -83,7 +82,6 @@ export default class App {
             navigate: this.navigate
         }
         let parseBasePath = this.#location?.path || '';
-        console.log(this.#basePath)
         const find = this.#router.find((route) => {
             return urlParse(route.path)?.path === parseBasePath;
         });

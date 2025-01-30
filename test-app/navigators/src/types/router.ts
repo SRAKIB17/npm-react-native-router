@@ -1,6 +1,8 @@
-export type NavigatePushProps = (url: string, option?: {
+
+export type PushPathOption = {
     title?: string;
-}) => Promise<void>
+}
+export type NavigatePushProps = (path: string, option?: PushPathOption) => Promise<void>
 
 export type RouterProps = {
     path: string | null;

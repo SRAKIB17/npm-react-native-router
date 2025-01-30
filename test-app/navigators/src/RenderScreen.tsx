@@ -1,13 +1,13 @@
-
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, Text, View } from 'react-native';
 import { NavigationContext } from './NavigationContainer';
 import { useRouter } from './router/RouterContext';
 import BottomTabs from './shared/BottomTabs';
-import MainHeader from './shared/MainHeader';
 import HeaderBar from './shared/HeaderBar';
+import LoadingOverlay, { LoadingScreen } from './shared/LoaderComponent';
+import MainHeader from './shared/MainHeader';
 import { useTheme } from './theming/ThemeContext';
-import type { ConfigType, RenderRoutesType, ScreenProps } from './types';
+import type { AppConfig, RenderRoutesType, ScreenConfig, ScreenProps } from './types';
 
 type arrayProps = {
     children: RenderRoutesType;
@@ -19,37 +19,47 @@ export default class RenderScreen {
     }
     Render({ children }: { children: { props: RenderRoutesType } | arrayProps[] | any }) {
 
-        const { NavigationPropertyPass: NavigationProps, title, setTitle } = useContext(NavigationContext);
-        const config: ConfigType = NavigationProps?.config
+        const {
+            NavigationPropertyPass: NavigationProps,
+            setTitle,
+            title,
+            isLoading,
+            setLoading,
+            loadingScreen,
+            setLoadingScreen,
+        } = useContext(NavigationContext);
+        const config: AppConfig = NavigationProps?.config
         // const { setDrawerConfig, drawerConfig } = userDrawer()
         const { colors } = useTheme();
 
         const router = useRouter()
         const { path, asPath, push, basePath } = router;
+        const [configSet, setConfigSet] = useState<any>();
 
-        const [test, setConfig] = useState<any>();
+        let props_title = '';
         const rest: ScreenProps = {
-            setConfig: (config: ConfigType) => {
-                setConfig(config)
+            setConfig: (config: AppConfig) => {
+                setConfigSet(config)
             },
+            title,
+            router,
             params: NavigationProps?.params,
             navigate: push,
-            setTitle: setTitle
+            setTitle: (t: string) => {
+                console.log(props_title)
+                props_title = t;
+                console.log(t)
+                // setTitle(t);
+                setTitle(t)
+            },
+            isLoading,
+            setLoading,
+            loadingScreen,
+            setLoadingScreen,
             // customDynamicNavbar,
             // setCustomDynamicNavbar,
-            // loadingComponent,
             // setLoadingComponent,
         }
-        useEffect(() => {
-            if (test) {
-                NavigationProps.config = {
-                    ...NavigationProps.config,
-                    ...test
-                }
-            }
-        }, [test])
-
-
 
         // const [fadeAnim] = useState(new Animated.Value(0)); // Initial opacity: 0
 
@@ -83,7 +93,6 @@ export default class RenderScreen {
                 return not_found?.props?.path == '*';
             })
 
-
             // useEffect(() => {
             //     if (findScreen?.props?.drawerConfig && Object?.values(findScreen?.props?.drawerConfig)?.length) {
             //         setDrawerConfig({
@@ -97,12 +106,16 @@ export default class RenderScreen {
             // }, [findScreen])
 
             useEffect(() => {
-                setTitle(findScreen?.props?.title);
-
-                return () => {
+                if (props_title) {
+                    console.log(3544444444444444, props_title)
+                    setTitle(props_title)
+                }
+                else {
+                    console.log(props_title, 'xxxxxxx')
+                    props_title = findScreen?.props?.title;
                     setTitle(findScreen?.props?.title);
                 }
-            }, [path, asPath])
+            }, [path, asPath, props_title])
 
 
             const Render = findScreen?.props?.screen || function () {
@@ -132,71 +145,64 @@ export default class RenderScreen {
                 )
             }
 
+            const screenConfig: ScreenConfig = {
+                ...config,
+                ...findScreen?.props?.config,
+                ...configSet
+            };
+            const {
+                bottomTabs,
+                showBottomTabs,
+                showHeaderBar,
+                headerBar,
+                loadingOverlay: LoadingOverlayNode,
+                loadingScreen: LoadingScreenNode
+            } = screenConfig;
             return (
                 <>
                     {
                         // Boolean(customDynamicNavbar) ?
                         //     customDynamicNavbar
                         //     :
-                        (findScreen?.props?.headerBar ||
-                            (
-                                [undefined, true]?.includes(findScreen?.props?.hasHeaderBar) ?
-                                    <View>
-                                        {
-                                            basePath == asPath ?
-                                                <>
-                                                    {
-                                                        (config?.mainHeader) ?
-                                                            config?.mainHeader
-                                                            :
-                                                            <MainHeader
-                                                                title={title}
-                                                            />
-                                                    }
-                                                </>
-                                                :
-                                                <>
-                                                    {
-                                                        config?.headerBar ?
-                                                            config?.headerBar
-                                                            :
-                                                            <HeaderBar
-                                                                title={title}
-                                                            />
-                                                    }
-                                                </>
-                                        }
-                                    </View>
+                        (
+                            [undefined, true]?.includes(showHeaderBar) ?
+                                basePath == asPath ?
+                                    config?.mainHeader || <MainHeader
+                                        title={title}
+                                    />
                                     :
-                                    null
-                            )
+                                    headerBar || <HeaderBar
+                                        title={title}
+                                    />
+                                :
+                                null
                         )
                     }
+
 
                     <View style={{
                         flex: 1,
                         backgroundColor: colors?.background
                     }}>
                         {
-                            // loadingComponent ?
-                            //     <LoaderComponent /> :
-                            <Render {...rest} />
+                            loadingScreen ?
+                                (LoadingScreenNode || <LoadingScreen />) :
+                                <>
+                                    {
+                                        isLoading &&
+                                        (LoadingOverlayNode || <LoadingOverlay />)
+                                    }
+                                    <Render {...rest} />
+                                </>
                         }
                     </View>
                     {
-                        (
-                            findScreen?.props?.bottomTabs ||
-                            (
-                                [undefined, true]?.includes(findScreen?.props?.hasBottomTabs) &&
-                                <>
-                                    {
-                                        config?.bottomTabs ?
-                                            config?.bottomTabs :
-                                            <BottomTabs />
-                                    }
-                                </>
-                            )
-                        )
+                        [undefined, true]?.includes(showBottomTabs) ?
+                            bottomTabs ?
+                                bottomTabs :
+                                <BottomTabs />
+                            :
+                            null
                     }
                 </>
             )
@@ -211,6 +217,20 @@ export default class RenderScreen {
             rest.params = params;
             NavigationProps.params = params?.params;
             setTitle(children?.props?.title)
+
+            const screenConfig: ScreenConfig = {
+                ...config,
+                ...children?.props?.config,
+                ...configSet
+            };
+
+            const { bottomTabs,
+                showBottomTabs,
+                showHeaderBar,
+                headerBar,
+                loadingOverlay: LoadingOverlayNode,
+                loadingScreen: LoadingScreenNode
+            } = screenConfig;
 
             const privateCheck = (children?.props?.isPrivate ? children?.props?.privateState : true)
 
@@ -246,39 +266,21 @@ export default class RenderScreen {
                         // Boolean(customDynamicNavbar) ?
                         //     customDynamicNavbar
                         //     :
-                        (children?.props?.navbar ||
-                            (
-                                [undefined, true]?.includes(children?.props?.hasNavbar) ?
-                                    <View>
-                                        {
-                                            basePath == asPath ?
-                                                <>
-                                                    {
-                                                        config?.mainHeader ?
-                                                            config?.mainHeader
-                                                            :
-                                                            <MainHeader
-                                                                title={title}
-                                                            />
-                                                    }
-                                                </>
-                                                :
-                                                <>
-                                                    {
-                                                        config?.headerBar ?
-                                                            config?.headerBar
-                                                            :
-                                                            <HeaderBar
-                                                                title={title}
-                                                            />
-                                                    }
-                                                </>
-
-                                        }
-                                    </View>
+                        // Boolean(customDynamicNavbar) ?
+                        //     customDynamicNavbar
+                        //     :
+                        (
+                            [undefined, true]?.includes(showHeaderBar) ?
+                                basePath == asPath ?
+                                    config?.mainHeader || <MainHeader
+                                        title={title}
+                                    />
                                     :
-                                    null
-                            )
+                                    headerBar || <HeaderBar
+                                        title={title}
+                                    />
+                                :
+                                null
                         )
                     }
 
@@ -287,32 +289,31 @@ export default class RenderScreen {
                         backgroundColor: colors?.background
                     }}>
                         {
-                            // loadingComponent ?
-                            //     <LoaderComponent /> :
-                            <Render {...rest} />
+                            loadingScreen ?
+                                (LoadingScreenNode || <LoadingScreen />) :
+                                <>
+                                    {
+                                        isLoading &&
+                                        (LoadingOverlayNode || <LoadingOverlay />)
+                                    }
+                                    <Render {...rest} />
+                                </>
                         }
                     </View>
                     {
-                        (children?.props?.footer || (children?.props?.hasFooter &&
-                            <>
-                                {
-                                    config?.bottomTabs ?
-                                        config?.bottomTabs :
-                                        <BottomTabs />
-                                }
-                            </>
-                        ))
+                        [undefined, true]?.includes(showBottomTabs) ?
+                            bottomTabs ?
+                                bottomTabs :
+                                <BottomTabs />
+                            :
+                            null
                     }
                 </>
             )
         }
     }
 
-    screen({
-        screen,
-        path: link,
-        hasHeaderBar: hasNavbar = true
-    }: RenderRoutesType) {
+    screen({ }: RenderRoutesType) {
         return null
     }
 }

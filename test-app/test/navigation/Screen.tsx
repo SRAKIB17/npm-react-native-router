@@ -311,7 +311,6 @@ export default class RenderScreen {
         path: link,
         hasNavbar = true
     }: any) {
-        console.log(screen)
         return null
     }
 }

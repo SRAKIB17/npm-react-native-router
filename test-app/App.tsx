@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
 import { StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { assets_images } from './assets/assets_images';
-import { BottomTabs, HeaderBar, MainHeader, NavigationContainer, RenderScreen, ScreenProps, useConfig, useNavigation, useRouter, useTheme } from './navigators';
-
+import { BottomTabs, HeaderBar, LoadingOverlay, MainHeader, NavigationContainer, RenderScreen, ScreenProps, useNavigation, useRouter, useTheme } from './navigators';
+function Loader() {
+  return <LoadingOverlay />
+}
 function MainNavbar() {
   const router = useRouter();
+
   return (
-    <MainHeader title='BdHex'  >
+    <MainHeader title={router.title || "BdHex"}>
       <TouchableOpacity style={styles.button} onPress={() => router.push("/about")}>
         <Text style={styles.buttonText}>Back to Home</Text>
       </TouchableOpacity>
@@ -17,7 +20,7 @@ function MainNavbar() {
 function Navbar() {
   const router = useRouter();
   return (
-    <HeaderBar title='BdHex'  >
+    <HeaderBar title={router.title || "BdHex"} >
       {/* <View style={{ width: 100 }}>
         <TouchableOpacity style={styles.button} onPress={() => router.push("/home")}>
           <Text style={styles.buttonText}>Back to Home</Text>
@@ -74,6 +77,7 @@ export default function Root() {
     <NavigationContainer
       // scheme='dark'
       config={{
+        loadingOverlay: <Loader />,
         headerBar: <Navbar />,
         mainHeader: <MainNavbar />,
         bottomTabs: <Bottom />
@@ -89,7 +93,6 @@ export default function Root() {
 const WrapScreen = () => {
   const { dark, colors } = useTheme();
   const navigation = useNavigation();
-  console.log(navigation.title)
   return (
     <>
       <StatusBar
@@ -160,31 +163,48 @@ const Home = ({ navigate }: ScreenProps) => {
   );
 };
 
-const About = ({ navigate, params, setTitle }: ScreenProps) => {
+const About = ({ navigate, params, setLoadingScreen, setTitle, title, setLoading, isLoading }: ScreenProps) => {
   const { colors, dark } = useTheme();
-  useEffect(() => {
-    setTitle('testing')
-  }, [])
+
+  // useEffect(() => {
+  setTitle('testing')
+  // }, [])
+
+
+  const fet = () => {
+    setTitle("😍😍😍😍😍😍")
+  }
+
+  // const fet = () => {
+  //   setLoadingScreen(true)
+  //   setTimeout(() => {
+  //     setLoading(true);
+  //     setTimeout(() => {
+  //       setTitle("😍😍😍😍😍😍")
+  //       setLoading(false);
+  //     }, 2000);
+  //     setLoadingScreen(false)
+  //   }, 3000);
+  // }
+
   return (
-    <View style={[styles.container, { backgroundColor: colors?.danger }]}>
+    <View style={[styles.container]}>
       <Text style={styles.title}>ℹ️ About</Text>
       <TouchableOpacity style={styles.button} onPress={() => navigate("/home")}>
         <Text style={styles.buttonText}>Back to Home</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => fet()}>
+        <Text style={styles.buttonText}>Testing LoadingOverlay</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
 const Settings = ({ navigate, params, setConfig }: ScreenProps) => {
-  const config = useConfig();
-  console.log(config);
-
   useEffect(() => {
-    setTimeout(() => {
-      setConfig({
-        bottomTabs: <Navbar />
-      })
-    }, 2000);
+    setConfig({
+      bottomTabs: <Navbar />
+    })
     // setTimeout(() => {
     //   set({
     //     headerBar: <Bottom />

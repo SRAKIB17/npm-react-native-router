@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { Alert, BackHandler } from 'react-native';
-import type { RouterProps } from '../types';
+import type { PushPathOption, RouterProps } from '../types';
 import { urlParse } from '../utils/url';
 const RouterContext = createContext<RouterProps>({
     hash: "",
@@ -28,11 +28,16 @@ const RouterContext = createContext<RouterProps>({
 type Props = {
     basePath: string;
     children: React.ReactNode;
-    setLoadingComponent: React.Dispatch<React.SetStateAction<boolean>>,
+    setLoadingScreen: React.Dispatch<React.SetStateAction<boolean>>,
     title: string,
 };
 
-export function RouterProvider({ basePath: basePath, children, setLoadingComponent, title }: Props) {
+export function RouterProvider({
+    basePath: basePath,
+    children,
+    setLoadingScreen,
+    title
+}: Props) {
     const navigationStack = useRef<string[]>([]); // Manually manage navigation stack
     const parseBasePath = urlParse(basePath).path || ''
     const [screen, setScreen] = useState(parseBasePath);
@@ -41,15 +46,15 @@ export function RouterProvider({ basePath: basePath, children, setLoadingCompone
     class history {
         back = async () => {
             if (navigationStack.current?.length >= 1) {
-                setLoadingComponent(true);
+                setLoadingScreen(true);
                 navigationStack.current.pop()
                 setScreen(navigationStack.current[navigationStack?.current?.length - 1] || parseBasePath)
-                setLoadingComponent(false)
+                setLoadingScreen(false)
             }
             else {
-                setLoadingComponent(true)
+                setLoadingScreen(true)
                 setScreen(parseBasePath)
-                setLoadingComponent(false)
+                setLoadingScreen(false)
             }
         }
         get() {
@@ -57,25 +62,20 @@ export function RouterProvider({ basePath: basePath, children, setLoadingCompone
         }
     }
 
-    async function push(path: string,
-        option: {
-            title?: string,
-        }) {
-        // setLoadingComponent(true)
+    async function push(path: string, option: PushPathOption) {
+        setLoadingScreen(true)
         setScreen(path)
         navigationStack.current.push(path)
-        // setLoadingComponent(false)
+        setLoadingScreen(false)
     }
 
     const historyConstructor: any = new history()
     const send_date: any = {
         basePath: parseBasePath,
-        title: title,
         push,
         history: historyConstructor,
         ...locationParse
     }
-
 
     useEffect(() => {
         const backAction = () => {
@@ -109,7 +109,10 @@ export function RouterProvider({ basePath: basePath, children, setLoadingCompone
     }, [navigationStack, screen]);
 
     return (
-        <RouterContext.Provider value={send_date}>
+        <RouterContext.Provider value={{
+            ...send_date,
+            title: title
+        }}>
             {children}
         </RouterContext.Provider>
     );
@@ -118,7 +121,6 @@ export function RouterProvider({ basePath: basePath, children, setLoadingCompone
 
 
 export function useRouter() {
-
     const location = useContext(RouterContext);
     return location;
 }

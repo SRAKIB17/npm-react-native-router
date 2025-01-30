@@ -267,7 +267,6 @@ class RenderScreen {
         // }
     }
     screen({ screen, path: link, hasNavbar = true }) {
-        console.log(screen);
         return null;
     }
 }

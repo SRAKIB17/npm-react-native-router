@@ -35,7 +35,6 @@ class App {
         };
         this.navigate = (path) => {
             __classPrivateFieldSet(this, _App_basePath, path, "f");
-            console.log(__classPrivateFieldGet(this, _App_basePath, "f"));
             __classPrivateFieldSet(this, _App_location, (0, url_1.urlParse)(__classPrivateFieldGet(this, _App_basePath, "f")), "f");
             this.Router({ router: __classPrivateFieldGet(this, _App_router, "f") });
         };

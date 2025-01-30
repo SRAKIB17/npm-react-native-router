@@ -3,3 +3,5 @@
 3. main header
 4. header bar
 5. bottom bar
+6. Loader component
+7. Loader Screen

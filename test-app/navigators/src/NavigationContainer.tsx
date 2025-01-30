@@ -1,10 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { RouterProvider } from './router/RouterContext';
 import { ThemeProvider } from './theming/ThemeContext';
-import type { ConfigType, NavigationProviderProps, RenderRoutesType, SchemeThemeProps, ThemeColorNameProps } from './types';
+import type { AppConfig, NavigationProviderProps, SchemeThemeProps } from './types';
 
 export class NavigationPropertyPass {
-    static config?: ConfigType;
+    static config?: AppConfig;
     static basePath: string = '';
     static params: {
         [key: string]: any
@@ -12,11 +12,13 @@ export class NavigationPropertyPass {
 }
 
 export const NavigationContext = createContext<NavigationProviderProps>({
-    loadingComponent: false,
+    isLoading: false,
     title: "",
+    loadingScreen: false,
+    setLoadingScreen: () => { },
     setTitle: () => { },
     NavigationPropertyPass: NavigationPropertyPass,
-    setLoadingComponent: () => { },
+    setLoading: () => { },
     customDynamicNavbar: undefined,
     setCustomDynamicNavbar: () => { },
 })
@@ -32,20 +34,23 @@ export default function NavigationContainer({
     scheme?: "dark" | "default",
     basePath: string,
     children: React.ReactNode,
-    config?: ConfigType
+    config?: AppConfig
 }): JSX.Element {
+
     NavigationPropertyPass.basePath = basePath;
     NavigationPropertyPass.config = config;
     const [title, setTitle] = useState<string>('');
 
-    const [loadingComponent, setLoadingComponent] = useState<boolean>(false);
+    const [isLoading, setLoading] = useState<boolean>(false);
+    const [loadingScreen, setLoadingScreen] = useState<boolean>(false);
     const [customDynamicNavbar, setCustomDynamicNavbar] = useState<React.ReactNode>(undefined);
+
 
     return (
         <RouterProvider
             title={title}
             basePath={basePath}
-            setLoadingComponent={setLoadingComponent}
+            setLoadingScreen={setLoadingScreen}
         >
             <ThemeProvider
                 scheme={scheme}
@@ -54,12 +59,14 @@ export default function NavigationContainer({
                 <NavigationContext.Provider
                     value={{
                         setTitle,
+                        loadingScreen,
+                        setLoadingScreen,
                         title,
+                        isLoading,
+                        setLoading: setLoading,
                         NavigationPropertyPass: NavigationPropertyPass,
                         customDynamicNavbar: customDynamicNavbar,
                         setCustomDynamicNavbar: setCustomDynamicNavbar,
-                        loadingComponent: loadingComponent,
-                        setLoadingComponent: setLoadingComponent,
                     }}
                 >
                     {
@@ -75,8 +82,8 @@ export default function NavigationContainer({
 export function useNavigation() {
     const {
         customDynamicNavbar,
-        loadingComponent,
-        setLoadingComponent,
+        isLoading,
+        setLoading,
         setCustomDynamicNavbar,
         setTitle,
         title,
@@ -85,8 +92,8 @@ export function useNavigation() {
         setTitle,
         title,
         customDynamicNavbar,
-        loadingComponent,
-        setLoadingComponent,
+        isLoading,
+        setLoading,
         setCustomDynamicNavbar
     }
 }
@@ -96,8 +103,4 @@ export function useParams() {
     return (NavigationPropertyPass as any).params;
 }
 
-export function useConfig() {
-    const { NavigationPropertyPass } = useContext(NavigationContext);
-    return NavigationPropertyPass?.config;
-}
 
