@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_native_1 = require("react-native");
-const src_1 = require("../../src");
+const src_1 = require("../../navigators/src");
 const PressableButton_1 = __importDefault(require("../button/PressableButton"));
 const global_1 = require("../global");
 const Pagination = ({ pageHandle = () => { }, currentPage, getLastPage, button, disableButton, }) => {

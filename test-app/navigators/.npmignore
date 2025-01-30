@@ -1,0 +1,20 @@
+# Ignore all .ts files except .d.ts files
+!*.d.ts
+*.ts
+
+# Optional: Allow specific .ts files if needed
+# !/specific-directory/*.ts
+/test
+/query
+/utilities
+/DataTypes
+/docs
+/dist/test
+/dist/DataTypes
+
+
+*.md
+!README.md
+tsconfig.json
+.npmignore
+.gitignore

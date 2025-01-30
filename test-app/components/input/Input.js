@@ -42,7 +42,7 @@ const react_native_1 = require("react-native");
 const Toast_1 = __importDefault(require("../toast/Toast"));
 const global_1 = require("../global");
 const StyledText_1 = __importDefault(require("../text/StyledText"));
-const src_1 = require("../../src");
+const src_1 = require("../../navigators/src");
 function Input({ asset, type = "text", defaultValue = '', value, setValue = () => { }, placeholder = 'Write something..', pattern, containerStyle, style = {}, toast = 'Please input valid info', multiline = false, autoFocus = false, }) {
     const [error, setError] = (0, react_1.useState)('');
     const [inputValue, setInputValue] = (0, react_1.useState)('');

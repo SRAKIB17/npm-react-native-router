@@ -36,7 +36,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = Root;
 const react_1 = __importStar(require("react"));
 const react_native_1 = require("react-native");
-const src_1 = require("./src");
+const src_1 = require("./navigators/src");
 function Root() {
     return (react_1.default.createElement(src_1.NavigationContainer
     // scheme='dark'

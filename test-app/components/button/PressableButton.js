@@ -8,7 +8,7 @@ const react_1 = __importDefault(require("react"));
 const react_native_1 = require("react-native");
 const global_1 = require("../global");
 const StyledText_1 = __importDefault(require("../text/StyledText"));
-const src_1 = require("../../src");
+const src_1 = require("../../navigators/src");
 function PressableButton({ text, disableStyle, onPress, containerStyle, numberOfLines, disabled = false, image = 0, image_url = '', imageStyle, textStyle }) {
     const { colors } = (0, src_1.useTheme)();
     const styles = react_native_1.StyleSheet.create({

@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importDefault(require("react"));
 const react_native_1 = require("react-native");
-const src_1 = require("../../src");
+const src_1 = require("../../navigators/src");
 const global_1 = require("../global");
 const StyledText = ({ children, style, numberOfLines }) => {
     const { colors } = (0, src_1.useTheme)();

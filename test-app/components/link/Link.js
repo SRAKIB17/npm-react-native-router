@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = Link;
 const react_1 = __importDefault(require("react"));
 const react_native_1 = require("react-native");
-const src_1 = require("../../src");
+const src_1 = require("../../navigators/src");
 const StyledText_1 = __importDefault(require("../text/StyledText"));
 function Link({ href = '', children, style = {} }) {
     const { colors } = (0, src_1.useTheme)();
