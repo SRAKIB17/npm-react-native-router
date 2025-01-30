@@ -4,7 +4,6 @@ import { ThemeProvider } from './theming/ThemeContext';
 import type { ConfigType, NavigationProviderProps, RenderRoutesType, SchemeThemeProps, ThemeColorNameProps } from './types';
 
 export class NavigationPropertyPass {
-    static router: RenderRoutesType[] = [];
     static config?: ConfigType;
     static basePath: string = '';
     static params: {
@@ -37,39 +36,38 @@ export default function NavigationContainer({
 }): JSX.Element {
     NavigationPropertyPass.basePath = basePath;
     NavigationPropertyPass.config = config;
-
     const [title, setTitle] = useState<string>('');
 
     const [loadingComponent, setLoadingComponent] = useState<boolean>(false);
     const [customDynamicNavbar, setCustomDynamicNavbar] = useState<React.ReactNode>(undefined);
 
     return (
-        <NavigationContext.Provider
-            value={{
-                setTitle,
-                title,
-                NavigationPropertyPass: NavigationPropertyPass,
-                customDynamicNavbar: customDynamicNavbar,
-                setCustomDynamicNavbar: setCustomDynamicNavbar,
-                loadingComponent: loadingComponent,
-                setLoadingComponent: setLoadingComponent,
-            }}
+        <RouterProvider
+            title={title}
+            basePath={basePath}
+            setLoadingComponent={setLoadingComponent}
         >
             <ThemeProvider
                 scheme={scheme}
                 theme={theme}
             >
-                <RouterProvider
-                    title={title}
-                    basePath={basePath}
-                    setLoadingComponent={setLoadingComponent}
+                <NavigationContext.Provider
+                    value={{
+                        setTitle,
+                        title,
+                        NavigationPropertyPass: NavigationPropertyPass,
+                        customDynamicNavbar: customDynamicNavbar,
+                        setCustomDynamicNavbar: setCustomDynamicNavbar,
+                        loadingComponent: loadingComponent,
+                        setLoadingComponent: setLoadingComponent,
+                    }}
                 >
                     {
                         children
                     }
-                </RouterProvider>
+                </NavigationContext.Provider>
             </ThemeProvider>
-        </NavigationContext.Provider>
+        </RouterProvider>
     );
 }
 
@@ -94,7 +92,12 @@ export function useNavigation() {
 }
 
 export function useParams() {
-    const { NavigationPropertyPass: NavigationProps } = useContext(NavigationContext);
-    return (NavigationProps as any).params;
+    const { NavigationPropertyPass } = useContext(NavigationContext);
+    return (NavigationPropertyPass as any).params;
+}
+
+export function useConfig() {
+    const { NavigationPropertyPass } = useContext(NavigationContext);
+    return NavigationPropertyPass?.config;
 }
 

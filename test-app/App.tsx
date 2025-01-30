@@ -1,7 +1,71 @@
 import React, { useEffect } from 'react';
 import { StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { NavigationContainer, RenderScreen, useTheme } from './navigators/src';
-import { ScreenProps } from './navigators/src/types';
+import { assets_images } from './assets/assets_images';
+import { BottomTabs, HeaderBar, MainHeader, NavigationContainer, RenderScreen, ScreenProps, useConfig, useNavigation, useRouter, useTheme } from './navigators';
+
+function MainNavbar() {
+  const router = useRouter();
+  return (
+    <MainHeader title='BdHex'  >
+      <TouchableOpacity style={styles.button} onPress={() => router.push("/about")}>
+        <Text style={styles.buttonText}>Back to Home</Text>
+      </TouchableOpacity>
+    </MainHeader>
+  )
+}
+
+function Navbar() {
+  const router = useRouter();
+  return (
+    <HeaderBar title='BdHex'  >
+      {/* <View style={{ width: 100 }}>
+        <TouchableOpacity style={styles.button} onPress={() => router.push("/home")}>
+          <Text style={styles.buttonText}>Back to Home</Text>
+        </TouchableOpacity>
+      </View> */}
+    </HeaderBar>
+  )
+}
+
+function Bottom() {
+  const router = useRouter();
+
+  return (
+    <BottomTabs
+      tabs={[
+        {
+          icon: {
+            default: assets_images.arrow_left_indicate_light,
+            select: assets_images.arrow_left_indicate_light
+          },
+          path: '/about/sf',
+          title: "Home"
+        }
+      ]}
+      style={{ backgroundColor: '' }}
+      buttonStyle={{
+        backgroundColor: 'red',
+      }}
+    >
+      <View>
+        <TouchableOpacity style={styles.button} onPress={() => router.push("/home")}>
+          <Text style={styles.buttonText}>Back to Home</Text>
+        </TouchableOpacity>
+      </View>
+      <View>
+        <TouchableOpacity style={styles.button} onPress={() => router.push("/home")}>
+          <Text style={styles.buttonText}>Back to Home</Text>
+        </TouchableOpacity>
+      </View>
+      <View>
+        <TouchableOpacity style={styles.button} onPress={() => router.push("/home")}>
+          <Text style={styles.buttonText}>Back to Home</Text>
+        </TouchableOpacity>
+      </View>
+
+    </BottomTabs>
+  )
+}
 
 
 export default function Root() {
@@ -9,7 +73,11 @@ export default function Root() {
   return (
     <NavigationContainer
       // scheme='dark'
-
+      config={{
+        headerBar: <Navbar />,
+        mainHeader: <MainNavbar />,
+        bottomTabs: <Bottom />
+      }}
       // scheme={scheme !== 'dark' ? 'dark' : 'default'}
       basePath={'/home'}
     >
@@ -20,7 +88,8 @@ export default function Root() {
 
 const WrapScreen = () => {
   const { dark, colors } = useTheme();
-
+  const navigation = useNavigation();
+  console.log(navigation.title)
   return (
     <>
       <StatusBar
@@ -37,13 +106,12 @@ const WrapScreen = () => {
 
 function Screen(): JSX.Element {
   const Render = new RenderScreen()
-
   return (
     <Render.Render>
       <Render.screen
         path={'/home'}
         title='Home'
-        hasBottomTabs
+        // hasBottomTabs
         // hasNavbar={true}
         // navbar={<MainNavbar
         //   title='Ahliya' children={<Home />}
@@ -107,7 +175,23 @@ const About = ({ navigate, params, setTitle }: ScreenProps) => {
   );
 };
 
-const Settings = ({ navigate, params }: ScreenProps) => {
+const Settings = ({ navigate, params, setConfig }: ScreenProps) => {
+  const config = useConfig();
+  console.log(config);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setConfig({
+        bottomTabs: <Navbar />
+      })
+    }, 2000);
+    // setTimeout(() => {
+    //   set({
+    //     headerBar: <Bottom />
+    //   })
+    // }, 2000);
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>⚙️ Settings</Text>

@@ -5,8 +5,7 @@
     "strict": true,
     "jsx": "react",
     "moduleResolution": "node",
-    "esModuleInterop": true,
-    // "outDir": "dist"
+    "esModuleInterop": true
   },
   "include": [
     "./**/*.ts",
@@ -14,5 +13,6 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "extends": "expo/tsconfig.base"
 }

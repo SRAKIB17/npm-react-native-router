@@ -1,16 +1,16 @@
 
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Text, View } from 'react-native';
 import { NavigationContext } from './NavigationContainer';
 import { useRouter } from './router/RouterContext';
-import Footer from './shared/Footer';
-import MainNavbar from './shared/MainNavbar';
-import NavbarTitleBackButton from './shared/NavbarTitleBackButton';
+import BottomTabs from './shared/BottomTabs';
+import MainHeader from './shared/MainHeader';
+import HeaderBar from './shared/HeaderBar';
 import { useTheme } from './theming/ThemeContext';
 import type { ConfigType, RenderRoutesType, ScreenProps } from './types';
 
 type arrayProps = {
-    children: RenderRoutesType
+    children: RenderRoutesType;
 }
 
 export default class RenderScreen {
@@ -25,9 +25,13 @@ export default class RenderScreen {
         const { colors } = useTheme();
 
         const router = useRouter()
-        const { path, asPath, push, basePath } = router
+        const { path, asPath, push, basePath } = router;
 
+        const [test, setConfig] = useState<any>();
         const rest: ScreenProps = {
+            setConfig: (config: ConfigType) => {
+                setConfig(config)
+            },
             params: NavigationProps?.params,
             navigate: push,
             setTitle: setTitle
@@ -36,6 +40,14 @@ export default class RenderScreen {
             // loadingComponent,
             // setLoadingComponent,
         }
+        useEffect(() => {
+            if (test) {
+                NavigationProps.config = {
+                    ...NavigationProps.config,
+                    ...test
+                }
+            }
+        }, [test])
 
 
 
@@ -137,7 +149,7 @@ export default class RenderScreen {
                                                         (config?.mainHeader) ?
                                                             config?.mainHeader
                                                             :
-                                                            <MainNavbar
+                                                            <MainHeader
                                                                 title={title}
                                                             />
                                                     }
@@ -148,7 +160,7 @@ export default class RenderScreen {
                                                         config?.headerBar ?
                                                             config?.headerBar
                                                             :
-                                                            <NavbarTitleBackButton
+                                                            <HeaderBar
                                                                 title={title}
                                                             />
                                                     }
@@ -175,12 +187,12 @@ export default class RenderScreen {
                         (
                             findScreen?.props?.bottomTabs ||
                             (
-                                findScreen?.props?.hasBottomTabs &&
+                                [undefined, true]?.includes(findScreen?.props?.hasBottomTabs) &&
                                 <>
                                     {
                                         config?.bottomTabs ?
                                             config?.bottomTabs :
-                                            <Footer />
+                                            <BottomTabs />
                                     }
                                 </>
                             )
@@ -245,7 +257,7 @@ export default class RenderScreen {
                                                         config?.mainHeader ?
                                                             config?.mainHeader
                                                             :
-                                                            <MainNavbar
+                                                            <MainHeader
                                                                 title={title}
                                                             />
                                                     }
@@ -256,7 +268,7 @@ export default class RenderScreen {
                                                         config?.headerBar ?
                                                             config?.headerBar
                                                             :
-                                                            <NavbarTitleBackButton
+                                                            <HeaderBar
                                                                 title={title}
                                                             />
                                                     }
@@ -286,7 +298,7 @@ export default class RenderScreen {
                                 {
                                     config?.bottomTabs ?
                                         config?.bottomTabs :
-                                        <Footer />
+                                        <BottomTabs />
                                 }
                             </>
                         ))

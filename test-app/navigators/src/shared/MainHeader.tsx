@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useTheme } from '../theming/ThemeContext';
 
-const MainNavbar = ({
+const MainHeader = ({
     title,
     children
 }: {
@@ -71,4 +71,4 @@ const MainNavbar = ({
 };
 
 
-export default MainNavbar;
+export default MainHeader;

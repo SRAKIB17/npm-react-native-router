@@ -1,7 +1,9 @@
+import { ConfigType } from "./navigation";
 import type { NavigatePushProps } from "./router";
 
 export type ScreenProps = {
     navigate: NavigatePushProps,
+    setConfig: (config: ConfigType) => void;
     setTitle: (title: string) => void;
     params: {
         [key: string]: any;

@@ -1,30 +1,41 @@
-import NavigationContainer, { useNavigation } from "./NavigationContainer.js";
-import RenderScreen from "./RenderScreen";
-import { useTheme } from "./theming/ThemeContext";
-import { useRouter } from "./router/RouterContext.js";
-import DrawerContainer, { userDrawer } from "./drawer/DrawerContainer.js";
-import NavbarTitleBackButton from "./shared/NavbarTitleBackButton.js";
-import MainNavbar from "./shared/MainNavbar.js";
+import DrawerContainer, { userDrawer } from "./drawer/DrawerContainer";
+import HeaderBar from "./shared/HeaderBar";
 
-import type {
-    ScreenProps,
-    ThemeColorNameProps,
-    ParamsProps,
-    RouterProps,
-    NavigationProviderProps,
-    ThemeProps
+// !DONE
+import NavigationContainer, { useNavigation, useParams, useConfig } from "./NavigationContainer";
+import RenderScreen from "./RenderScreen";
+import { useRouter } from "./router/RouterContext";
+import MainHeader from "./shared/MainHeader";
+import { useTheme } from "./theming/ThemeContext";
+import BottomTabs from "./shared/BottomTabs";
+
+export {
+    BottomTabs,
+    HeaderBar,
+    MainHeader,
+    NavigationContainer, RenderScreen,
+    useNavigation, useParams,
+    useRouter,
+    useTheme,
+    useConfig,
+};
+
+// !DONE TYPE
+import {
+    ConfigType,
+    NavigatePushProps, NavigationProviderProps, ParamsProps, RenderRoutesType, RouterProps, SchemeThemeProps, ScreenProps,
+    ThemeColorNameProps, ThemeProps
 } from "./types";
 
 export {
+    ConfigType,
+    NavigatePushProps, NavigationProviderProps, ParamsProps, RenderRoutesType, RouterProps, SchemeThemeProps, ScreenProps,
+    ThemeColorNameProps, ThemeProps
+}
+// ! ************************************
+
+export {
     DrawerContainer,
-    MainNavbar,
-    NavigationContainer,
-    NavbarTitleBackButton, RenderScreen,
-    useRouter, useTheme, userDrawer,
-    useNavigation
+    userDrawer
 };
-export type {
-    RouterProps, ScreenProps, ParamsProps, NavigationProviderProps,
-    ThemeProps,
-    ThemeColorNameProps
-};
+
