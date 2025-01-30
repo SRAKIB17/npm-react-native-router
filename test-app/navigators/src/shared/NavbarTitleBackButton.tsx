@@ -1,10 +1,10 @@
 import React from 'react';
 import { ImageStyle, StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
-import { StyledText, TouchableOpacityButton } from '../../components';
-import { global_styles } from '../../components/global';
+import { StyledText, TouchableOpacityButton } from '../../../components';
+import { global_styles } from '../../../components/global';
 import { useRouter } from '../router/RouterContext';
 import { useTheme } from '../theming/ThemeContext';
-import { assets_images } from '../../assets/assets_images';
+import { assets_images } from '../../../assets/assets_images';
 
 const NavbarTitleBackButton = ({
     title,

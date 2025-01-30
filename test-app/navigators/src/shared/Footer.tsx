@@ -1,5 +1,5 @@
 import { Image, Pressable, StyleSheet, View } from 'react-native';
-import { StyledText } from '../../components';
+import { StyledText } from '../../../components';
 import { useRouter } from '../router/RouterContext';
 import { useTheme } from '../theming/ThemeContext';
 

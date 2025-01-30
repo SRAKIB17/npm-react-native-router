@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { NavigationContainer, RenderScreen, useTheme } from './src';
-import { ScreenProps } from './src/types';
+import { NavigationContainer, RenderScreen, useTheme } from './navigators/src';
+import { ScreenProps } from './navigators/src/types';
 
 
 export default function Root() {

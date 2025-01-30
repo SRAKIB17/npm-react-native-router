@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Dimensions, Image, Modal, Pressable, ScrollView, StatusBar, StyleSheet, TouchableHighlight, View } from 'react-native';
-import { useTheme } from '../../src/theming/ThemeContext';
+import { useTheme } from '../../navigators/src/theming/ThemeContext';
 import PressableButton from '../button/PressableButton';
 import { global_styles } from '../global';
 import Input from '../input/Input';

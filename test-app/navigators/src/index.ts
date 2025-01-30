@@ -1,10 +1,10 @@
 import NavigationContainer, { useNavigation } from "./NavigationContainer.js";
 import RenderScreen from "./RenderScreen";
 import { useTheme } from "./theming/ThemeContext";
-import { useRouter } from "./router/RouterContext";
-import DrawerContainer, { userDrawer } from "./drawer/DrawerContainer";
-import NavbarTitleBackButton from "./shared/NavbarTitleBackButton";
-import MainNavbar from "./shared/MainNavbar";
+import { useRouter } from "./router/RouterContext.js";
+import DrawerContainer, { userDrawer } from "./drawer/DrawerContainer.js";
+import NavbarTitleBackButton from "./shared/NavbarTitleBackButton.js";
+import MainNavbar from "./shared/MainNavbar.js";
 
 import type {
     ScreenProps,
